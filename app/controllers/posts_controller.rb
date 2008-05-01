@@ -12,6 +12,8 @@ class PostsController < ApplicationController
     end
   end
   
+  
+  
   def new
     @post = Post.new
     respond_to do |format|
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
     @post = Post.create(params[:post])
     respond_to do |format| 
       if @post.save
-        flash[:notice] = "Post was successfully created.".t
+        flash[:notice] = "Post was successfully created."
         format.html { redirect_to posts_path }
         format.xml  { render :xml => @post, :status => :create }
       else
@@ -37,7 +39,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format| 
       if @post.save
-        flash[:notice] = "Post was successfully created.".t
+        flash[:notice] = "Post was successfully created."
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
       else
@@ -49,7 +51,7 @@ class PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      flash[:notice] = "Post was successfully deleted".t
+      flash[:notice] = "Post was successfully deleted"
       respond_to do |format|
         format.html { redirect_to posts_path }
         format.xml  { head :ok }

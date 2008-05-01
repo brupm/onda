@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  # render new.rhtml
   def new
   end
 
@@ -36,10 +35,8 @@ class SessionsController < ApplicationController
          end
          self.current_user = @user
          successful_login
-         logger.debug { "============================== worked" }
        else
          failed_login result.message
-                  logger.debug { "============================== failed" }
        end
      end
    end
