@@ -1,0 +1,25 @@
+#form
+  - form_tag session_path do 
+    .field
+      = label_tag 'login' 
+      %br
+      = text_field_tag 'login'
+    
+    .field
+      = label_tag 'password' 
+      %br
+      = text_field_tag 'password'
+
+    .field
+      = label_tag 'remember me?' 
+      = check_box_tag 'remember_me'      
+
+    #open_id  
+      %p Or use OpenID
+      = label_tag 'openid_url' 
+      %br
+      = text_field_tag 'openid_url'
+
+    .field
+      = submit_tag 'Log in'
+

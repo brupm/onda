@@ -1,0 +1,7 @@
+%h2 New Post
+#form
+  - form_for @post do |f|
+    = render :partial => 'form', :locals => {:f => f} 
+    - fields_for :user, @user do |user|
+      = user.label 'email'
+    = submit_tag

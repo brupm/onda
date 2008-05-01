@@ -1,0 +1,9 @@
+#post
+  %h2 
+    = post.title
+    %small by
+    = post.user_id
+  %p
+    = post.description
+  %p 
+    = link_to post.url, post.url
