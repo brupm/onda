@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
+  
+  map.resource :session 
+
   map.resources :posts
   map.resources :users
-
-  map.resource :session
-  map.open_id_complete 'session', :controller => "session", :action => "create", :requirements => { :method => :get }
 
   map.root :controller => "posts"
 
