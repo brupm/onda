@@ -6,13 +6,7 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.latest
-    respond_to do |format|
-      format.html 
-      format.xml { render :xml => @posts }
-    end
   end
-  
-  
   
   def new
     @post = Post.new
@@ -24,6 +18,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.create(params[:post])
+    @post.user = current_user
     respond_to do |format| 
       if @post.save
         flash[:notice] = "Post was successfully created."

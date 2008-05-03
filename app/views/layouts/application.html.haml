@@ -6,6 +6,14 @@
   %body
     #header
       %h1 Ruby Onda
+    #options
+      = link_to 'RSS', formatted_posts_url(:rss)
+      = link_to 'Enviar Item', new_post_url
+    #sidebar
+      %p
+        Aqui tu encontra isso e aquilo
+      %p
+        A onda foi criada por the others
     #content
       = yield
     
