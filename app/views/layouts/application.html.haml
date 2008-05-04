@@ -3,18 +3,18 @@
 %html
   %head
     %title Title
+    = stylesheet_link_tag  "reset", "style", "960", "text" 
   %body
-    #header
-      %h1 Ruby Onda
-    #options
-      = link_to 'RSS', formatted_posts_url(:rss)
-      = link_to 'Enviar Item', new_post_url
-    #sidebar
-      %p
-        Aqui tu encontra isso e aquilo
-      %p
-        A onda foi criada por the others
-    #content
-      = yield
-    
+    .container_12
+      .grid_8.prefix_2
+        .grid_5.alpha.intro
+          %h2 Ruby na crista da onda. Chegou pra trazer as melhores noticias da communidade Ruby
+          = link_to 'RSS', formatted_posts_url(:rss)          
+          = link_to 'Enviar Item', new_post_url
+        .grid_3.omega.logo
+          %h1 Ruby Onda
+      .grid_8.prefix_2
+        = yield
+      .grid_8.prefix_2.footer
+        = render :partial => 'shared/footer' 
         

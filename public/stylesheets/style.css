@@ -1,0 +1,67 @@
+body {
+	background:#EBEBEB;
+	border-top:3px solid #373737;
+	padding-top:30px;
+	color:#585858;	
+}
+a{
+	color:#484848;
+	font-weight:bold;
+	padding:0;
+	margin:0;	
+}
+.logo h1 {
+	text-indent:-9999px;
+	height:175px;
+	width:175px;
+	background:url(/images/logo.png) no-repeat top right;
+}
+.intro {
+	text-align:right;
+	text-shadow: #FFF 2px 2px 2px;	
+}
+.intro h2 {
+	padding:1.5em 0em;
+	font-size:1.2em;
+}
+.day h3 {
+	font-size:.8em;
+	padding:1em 0em 0em 1.5em;
+	margin:0;
+	margin-bottom:-2em;
+	color: #818181;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+.post_top{
+	background:#EBEBEB url(/images/post_top.png) no-repeat top left;	
+	width:100%;
+	height:32px;
+}	
+.post {
+	background:white url(/images/post_bottom.png) no-repeat bottom left;
+}
+
+.content {
+	padding: .2em 1em .5em 1em;
+}
+.post h2{
+	color:#475491;
+	padding:0;
+	margin:0;
+	font-size:1em;
+}
+.post h2 a{
+	color:#475491;
+	font-size:1.2em;
+}
+.owner_time{
+	text-align:right;
+	font-style:italic;
+}
+.footer {
+	padding-top:2em;
+	text-align:center;
+	font-size:.8em;
+	text-shadow: #FFF 2px 2px 2px;	
+}

@@ -1,12 +1,13 @@
-#post
-  %h2 
-    = post.title
-    %small
+.post
+  .post_top
+  .content
+    %h2 
+      = link_to post.title, post.url
+    %p
+      = post.description
+    .owner_time
       postado por
       = link_to_unless post.user.url.blank?, post.user.login, post.user.url
       às
       = post.created_at.strftime("%H:%M")
-  %p
-    = post.description
-  %p 
-    = link_to post.url, post.url
+  

@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 
   before_filter :fetch_post, :only =>   [:edit, :update, :destroy]
-  #before_filter :authorize,  :except => [:index, :new, :create]
   before_filter :login_required, :only => [ :new, :update ]
   
   def index    
@@ -62,11 +61,4 @@ class PostsController < ApplicationController
   def fetch_post
     @post = Post.find(params[:id])
   end
-  
-  def authorize
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "bopia" && password == "bopia"
-    end
-  end
-  
 end
