@@ -1,8 +1,11 @@
 #post
   %h2 
     = post.title
-    %small by
-    = post.user.login
+    %small
+      postado por
+      = link_to_unless post.user.url.blank?, post.user.login, post.user.url
+      às
+      = post.created_at.strftime("%H:%M")
   %p
     = post.description
   %p 

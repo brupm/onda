@@ -4,8 +4,11 @@ class PostsController < ApplicationController
   #before_filter :authorize,  :except => [:index, :new, :create]
   before_filter :login_required, :only => [ :new, :update ]
   
-  def index
-    @posts = Post.latest(:limit => 20)
+  def index    
+    respond_to do |format|
+      format.rss  { @posts = Post.find_latest(:limit => 20) }
+      format.html { @posts = Post.paginate_latest(:page => params[:page] , :per_page => 50) }
+    end
   end
   
   def new
@@ -18,7 +21,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.create(params[:post])
-    @post.user = current_user
+    @post.user_id = current_user.id
     respond_to do |format| 
       if @post.save
         flash[:notice] = "Post was successfully created."

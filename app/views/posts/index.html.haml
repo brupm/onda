@@ -1,1 +1,8 @@
-= render :partial =>"post", :collection => @posts
+- @posts.group_by {|post| post.created_at.yday }.each do |day, posts|
+  .day
+    %h2 
+      = posts.first.created_at.to_formatted_s(:short)
+    .posts
+      = render :partial =>"post", :collection => posts
+
+= will_paginate @posts

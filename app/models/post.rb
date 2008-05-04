@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id
   
-  def self.latest(query_options = {})
+  def self.find_latest(query_options = {})
     with_scope(:find => {:conditions => {:state => 'published'}, :order => 'created_at DESC'} ) do
       find(:all, query_options)
     end
