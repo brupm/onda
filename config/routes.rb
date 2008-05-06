@@ -4,8 +4,14 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resource :session 
 
-  map.resources :posts
+  map.with_options(:controller => "sessions") do |sessions|
+    sessions.login "login", :action => "new"
+    sessions.logout "logout", :action => "destroy", :conditions => {:method => :delete}
+  end
+
+  map.resources :posts, :collection => {:pending => :get, :my => :get}, :member => {:publish => :post}
   map.resources :users
+  map.profile 'profile', :controller => "users", :action => "edit"
 
   map.root :controller => "posts"
 

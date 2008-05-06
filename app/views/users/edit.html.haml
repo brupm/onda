@@ -1,0 +1,26 @@
+#form
+  - form_for @user do |f| 
+    .field
+      = f.label 'Apelido'
+      %br
+      = f.text_field 'nick'
+      
+    .field
+      = f.label 'url (ex: seu blog)'
+      %br
+      = f.text_field 'url'
+    
+    .field
+      = f.label 'e-mail' 
+      %br
+      = f.text_field 'email'
+      
+    - if current_user.admin?
+      .field
+        = f.label 'admin'
+        = f.check_box 'admin'
+
+    .field
+      = submit_tag 'Salvar'
+      ou
+      = link_to 'Cancelar', posts_url

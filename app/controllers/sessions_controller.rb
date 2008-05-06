@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if using_open_id?
+    #if using_open_id?
       open_id_authentication(params[:openid_url])
-    else
-      password_authentication(params[:login], params[:password])
-    end
+    #else
+    #  password_authentication(params[:login], params[:password])
+    #end
   end
   
   def destroy
@@ -60,7 +60,7 @@ class SessionsController < ApplicationController
        self.current_user.remember_me
        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
      end
-     redirect_to posts_url
+     redirect_back_or_default('/')
      flash[:notice] = "Logged in successfully"
    end
 end

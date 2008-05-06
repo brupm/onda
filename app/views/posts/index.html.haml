@@ -1,7 +1,11 @@
-- @posts.group_by {|post| post.created_at.yday }.each do |day, posts|
+-if @title
+  %h1
+    = @title
+
+- @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
   .grid_8.day
     %h3 
-      = posts.first.created_at.to_formatted_s(:short)
+      = posts.first.posted_at.strftime("%d de %B, %Y")
     .post
       = render :partial =>"post", :collection => posts
 

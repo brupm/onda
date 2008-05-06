@@ -1,19 +1,28 @@
-!!! XML
+  !!! XML
 !!! 1.1
 %html
   %head
-    %title Title
+    %title Ruby.aOnda.com
     = stylesheet_link_tag  "reset", "style", "960", "text" 
   %body
     .container_12
       .grid_8.prefix_2
         .grid_5.alpha.intro
-          %h2 Ruby na crista da onda. Chegou pra trazer as melhores noticias da communidade Ruby
+          %h2 Ruby na crista da onda, trazendo as melhores notícias da comunidade Ruby.
           = link_to 'RSS', formatted_posts_url(:rss)          
-          = link_to 'Enviar Item', new_post_url
+          = link_to 'Postar', new_post_url
+          - if logged_in?
+            = link_to 'Perfil', profile_url
+            = link_to 'Meus Posts', my_posts_url
+            - if current_user.admin?
+              = link_to 'Pendentes', pending_posts_url
+            = link_to 'Sair', logout_url, :method => :delete
+          - else
+            = link_to 'Entrar', login_url
         .grid_3.omega.logo
-          %h1 Ruby Onda
+          = link_to '<h1>Ruby Onda</h1>', '/'
       .grid_8.prefix_2
+        = flash[:notice]
         = yield
       .grid_8.prefix_2.footer
         = render :partial => 'shared/footer' 

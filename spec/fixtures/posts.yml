@@ -1,3 +1,22 @@
+# == Schema Information
+# Schema version: 20080504223159
+#
+# Table name: posts
+#
+#  id               :integer(11)     not null, primary key
+#  title            :string(255)     not null
+#  url              :string(255)     not null
+#  description      :text            not null
+#  user_id          :integer(11)     not null
+#  state            :string(255)     default("pending"), not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#  published_at     :datetime
+#  authorized_by_id :integer(11)
+#  refused_by_id    :integer(11)
+#  refused_text     :string(200)
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # one:

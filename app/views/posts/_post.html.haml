@@ -1,13 +1,18 @@
-.post
+.post 
   .post_top
   .content
     %h2 
       = link_to post.title, post.url
     %p
       = post.description
+    - if logged_in? && current_user.admin? && post.pending?
+      %p
+        = link_to 'Publicar', publish_post_url(post), :method => :post
+        =# link_to_function 'Recusar', "alert('Recusando!')"
     .owner_time
       postado por
-      = link_to_unless post.user.url.blank?, post.user.login, post.user.url
+      = link_to_unless post.user.any_url.blank?, post.user.nick, post.user.any_url
+      = link_to('(perfil)', edit_user_url(post.user)) if logged_in? && current_user.admin?
       às
-      = post.created_at.strftime("%H:%M")
+      = post.posted_at.strftime("%H:%M")
   

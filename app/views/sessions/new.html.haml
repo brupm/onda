@@ -1,25 +1,28 @@
 #form
   - form_tag session_path do 
-    .field
-      = label_tag 'login' 
-      %br
-      = text_field_tag 'login'
-    
-    .field
-      = label_tag 'password' 
-      %br
-      = text_field_tag 'password'
-
-    .field
-      = label_tag 'remember me?' 
-      = check_box_tag 'remember_me'      
-
+    //  .field
+    //    = label_tag 'login' 
+    //    %br
+    //    = text_field_tag 'login'
+    //  
+    //  .field
+    //    = label_tag 'senha' 
+    //    %br
+    //    = text_field_tag 'password'
+    //
+    //  .field
+    //    = label_tag 'Lembre de mim!' 
+    //    = check_box_tag 'remember_me'  
+    //        
+    //  %br
     #open_id  
-      %p Or use OpenID
-      = label_tag 'openid_url' 
+      = label_tag 'OpenID' 
       %br
       = text_field_tag 'openid_url'
+      = submit_tag 'Entrar'
+      ou
+      = link_to 'Cancelar', root_url
+      
+    = javascript_tag '', :id => "openid_url", :charset => "utf-8", :src => "https://www.idselector.com/selector/8692a472556173cd7a863aaefc76047320d75ad6"
 
-    .field
-      = submit_tag 'Log in'
 
