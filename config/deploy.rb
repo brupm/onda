@@ -1,10 +1,9 @@
-require 'vlad'
 
 set :application, "rubyonda"
 set :domain,      "70.85.16.206"
 set :deploy_to,   "/var/rails/#{application}"
 set :repository,  "git://github.com/brupm/onda.git"
-                 
+
 set :mongrel_port, 8070
 set :mongrel_servers, 3
 
