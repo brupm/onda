@@ -9,10 +9,12 @@
       .grid_8.prefix_2
         .grid_5.alpha.intro
           %h2 Ruby na crista da onda. Chegou pra trazer as melhores noticias da communidade Ruby
-          = link_to 'RSS', formatted_posts_url(:rss)          
           = link_to 'Enviar Item', new_post_url
+          \//        
+          = link_to 'RSS', formatted_posts_url(:rss) 
         .grid_3.omega.logo
-          %h1 Ruby Onda
+          %h1 
+            = link_to "Ruby Onda", root_path
       .grid_8.prefix_2
         = yield
       .grid_8.prefix_2.footer
