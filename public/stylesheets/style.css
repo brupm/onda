@@ -13,8 +13,13 @@ a{
 .logo h1 {
 	text-indent:-9999px;
 	height:175px;
-	width:175px;
-	background:url(/images/logo.png) no-repeat top right;
+	width:175px;	
+	background:url(/images/logo.png) no-repeat top right;	
+}
+.logo h1 a {
+	display:block;
+	height:175px;
+	width:175px;	
 }
 .intro {
 	text-align:right;

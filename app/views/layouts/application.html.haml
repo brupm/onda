@@ -9,18 +9,25 @@
       .grid_8.prefix_2
         .grid_5.alpha.intro
           %h2 Ruby na crista da onda, trazendo as melhores notícias da comunidade Ruby.
-          = link_to 'RSS', formatted_posts_url(:rss)          
           = link_to 'Postar', new_post_url
+          \//        
+          = link_to 'RSS', formatted_posts_url(:rss)  
           - if logged_in?
+            \//
             = link_to 'Perfil', profile_url
+            \//
             = link_to 'Meus Posts', my_posts_url
             - if current_user.admin?
+              \//
               = link_to 'Pendentes', pending_posts_url
+            \//
             = link_to 'Sair', logout_url, :method => :delete
           - else
+            \//
             = link_to 'Entrar', login_url
         .grid_3.omega.logo
-          = link_to '<h1>Ruby Onda</h1>', '/'
+          %h1 
+            = link_to "Ruby Onda", root_path
       .grid_8.prefix_2
         = flash[:notice]
         = yield
