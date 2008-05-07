@@ -1,17 +1,16 @@
 .nav
-  = link_to 'Enviar Artigo', new_post_url
-  \//        
-  = link_to 'RSS', formatted_posts_url(:rss)
+  = link_to 'Enviar Artigo', new_post_url, :class => 'new' 
   - if logged_in?
-    \//
+
     = link_to 'Perfil', profile_url
-    \//
-    = link_to 'Meus Posts', my_posts_url
+
+    = link_to 'Meus Artigos', my_posts_url
     - if current_user.admin?
-      \//
+
       = link_to "Pendentes(#{Post.pending_count})", pending_posts_url
-    \//
+
     = link_to 'Sair', logout_url, :method => :delete
+    = link_to 'RSS', formatted_posts_url(:rss), :class => 'rss'
   - else
-    \//
     = link_to 'Entrar', login_url
+

@@ -12,7 +12,7 @@
             = "[#{post.state_pt}]"
         - if post.can_edit?(current_user)
           %small
-            = link_to "[editar]", edit_post_url(post)        
+            = link_to "[editar]", edit_post_url(post)
     %p
       = post.description
       - if logged_in? && @show_state && post.refused?
