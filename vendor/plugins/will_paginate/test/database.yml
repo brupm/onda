@@ -1,22 +1,23 @@
-sqlite3:
-  database: ":memory:"
-  adapter: sqlite3
-  timeout: 500
-
-sqlite2:
-  database: ":memory:"
-  adapter: sqlite2
-
-mysql:
+development:
   adapter: mysql
-  username: rails
-  password: mislav
   encoding: utf8
-  database: will_paginate_unittest
+  database: onda_dev
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
-postgres:
-  adapter: postgresql
-  username: mislav
-  password: mislav
-  database: will_paginate_unittest
-  min_messages: warning
+test:
+  adapter: mysql
+  encoding: utf8
+  database: onda_test
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+production:
+  adapter: mysql
+  encoding: utf8
+  database: onda_dev
+  username: root
+  password: 
+  socket: /tmp/mysql.sock
