@@ -88,9 +88,16 @@ h1 {
 .post h2 a:hover{
 	color: #297299;
 }
-h2 small a{
+h2 small a {
+	color: #8C8A8C !important;
 	font-weight: normal;
-	font-size: 1em;
+	font-size: 1em !important;
+	text-decoration:none !important;
+}
+h2 small {
+	color: #8C8A8C;
+	font-weight: normal;
+	font-size: 1em !important;
 	text-decoration:none !important;
 }
 .owner_time{
@@ -148,4 +155,7 @@ a.new{
 }
  a:hover.new{
 	color:#484848;
+}
+.bla {
+	display: none;
 }

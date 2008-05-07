@@ -21,6 +21,8 @@ class Post < ActiveRecord::Base
   
   STATE_PT = {'pending' => "pendente", 'refused' => "rejeitado", 'published' => "publicado"}
   
+  attr_accessor :hidden
+  
   belongs_to :user
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
   
@@ -29,10 +31,21 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id, :url, :title, :description
   validates_length_of :description, :maximum => 290
+  validates_length_of :title, :within => 10..70
   
   validates_presence_of :refused_text, :if => :refused?
   
   before_validation :set_state
+  
+  before_save :set_permalink
+  
+  def validate
+    if !hidden.nil?  
+      if hidden.length > 0
+        errors.add("spam bot detected, seu post ")
+      end
+    end
+  end
   
   def posted_at
     published_at || created_at
@@ -52,6 +65,10 @@ class Post < ActiveRecord::Base
   
   def state_pt
     STATE_PT[state]
+  end
+  
+  def full_url
+    url.include?("http://") ? url : "http://#{url}" 
   end
   
   def self.find_latest(query_options = {})
@@ -74,6 +91,16 @@ class Post < ActiveRecord::Base
     user.admin? || self.user_id == user.id && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 1.hour.ago))
   end
   
+  if OVERLOAD_TO_PARAM == "yes" 
+    def to_param
+      self.permalink
+    end
+  end
+  
+  def set_permalink
+    self.permalink = self.title.downcase.gsub(" ", "-")
+  end
+  
   private
   
   def set_state
@@ -93,8 +120,7 @@ class Post < ActiveRecord::Base
       end
     end
   end
-  
-  
+
   
 end
 

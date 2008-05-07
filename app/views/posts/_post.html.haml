@@ -5,16 +5,16 @@
       = avatar_tag(post.user.email)
     
     %h2 
-      = link_to post.title, post.url
+      = link_to post.title, post.full_url
       - if logged_in?
         - if @show_state
           %small
-            = "[#{post.state_pt}]"
+            = " - #{post.state_pt}"
         - if post.can_edit?(current_user)
           %small
-            = link_to "[editar]", edit_post_url(post)
+            = link_to "// editar", edit_post_url(post.permalink)
     %p
-      = post.description
+      = h post.description
       - if logged_in? && @show_state && post.refused?
         %br
         %strong
@@ -23,20 +23,23 @@
       
     - if logged_in? && current_user.admin? && post.pending?
       %p
-        = link_to 'Publicar', publish_post_url(post), :method => :post
+        = link_to 'Publicar', publish_post_url(post.permalink), :method => :post
         \//
-        = link_to_function 'Rejeitar', "$('refuse_#{dom_id(post)}').show(); $('link_refuse_#{dom_id(post)}').hide()", :id => "link_refuse_#{dom_id(post)}"
-        - form_for post, :url => refuse_post_url(post), :html => {:style => "display: none", :id => "refuse_#{dom_id(post)}", :method => :post} do |f|
+        = link_to_function 'Rejeitar', "$('refuse_#{dom_id(post.id)}').show(); $('link_refuse_#{dom_id(post.id)}').hide()", :id => "link_refuse_#{dom_id(post.id)}"
+        - form_for post, :url => refuse_post_url(post.permalink), :html => {:style => "display: none", :id => "refuse_#{dom_id(post.id)}", :method => :post} do |f|
           = f.text_area :refused_text, :size => "50x10"
           %br
           = submit_tag "Rejeitar"
           ou
-          = link_to_function "Cancelar", "$('refuse_#{dom_id(post)}').hide(); $('link_refuse_#{dom_id(post)}').show()"
+          = link_to_function "Cancelar", "$('refuse_#{dom_id(post.id)}').hide(); $('link_refuse_#{dom_id(post.id)}').show()"
     
     .owner_time
       postado por
-      = link_to_unless post.user.url.blank?, post.user.nick, post.user.url
+      = link_to_unless post.user.url.blank?, post.user.nick, post.user.full_url
       - if logged_in? && current_user.admin?
         \//
         = link_to('Perfil', edit_user_url(post.user)) 
+      \//
+      = link_to "Link Permanente", post_path(post.permalink)
+      
   

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse]
+  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse, :show]
   before_filter :login_required, :only => [ :new, :update, :pending, :publish, :refuse ]
   
   def index    
@@ -90,6 +90,8 @@ class PostsController < ApplicationController
     end
   end
   
+  def show; end
+  
   def destroy
     if @post.destroy
       flash[:notice] = "Artigo apagado com sucesso."
@@ -103,6 +105,6 @@ class PostsController < ApplicationController
   protected
 
   def fetch_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by_permalink(params[:id])
   end
 end

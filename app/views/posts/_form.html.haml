@@ -1,14 +1,16 @@
 .field
-  = f.label 'Título:' 
+  = f.label 'Título' 
   %br
   = f.text_field 'title'
   
 .field
-  = f.label 'Link:'
+  = f.label 'Link (automático no título)'
   %br
   = f.text_field 'url'
+  
+  = f.text_field 'hidden', :class => 'bla'
 
 .field
-  = f.label 'Texto:'
+  = f.label 'Texto (máximo de 290 letras, não é necessário incluir o link)'
   %br
-  = f.text_area 'description', :rows => 3
+  = f.text_area 'description', :rows => 6, :cols => 70

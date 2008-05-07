@@ -1,4 +1,8 @@
 .form
+  - unless current_user.admin? || current_user.has_min_authorized_posts?
+    .errors
+      Seu artigo ficará em moderação por não ter pelo menos 10 artigos publicados  
+  
   %h2 Novo Artigo
   .errors
     = error_messages_for :post
