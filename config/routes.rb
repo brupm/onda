@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resource :session
   
-  map.connect "inicio", :controller => "home"
+  map.home "sobre", :controller => "home"
 
   map.with_options(:controller => "sessions") do |sessions|
     sessions.login "entrar", :action => "new"
