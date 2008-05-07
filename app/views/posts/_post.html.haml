@@ -8,7 +8,7 @@
       = link_to post.title, post.url
       - if logged_in? && @show_state
         %small
-          = "[#{post.state_pt}]"
+          = " [#{post.state_pt}]"
     %p
       = post.description
       - if logged_in? && @show_state && post.refused?

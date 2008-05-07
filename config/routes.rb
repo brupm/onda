@@ -3,9 +3,12 @@ ActionController::Routing::Routes.draw do |map|
   map.aliases :resources, :posts => 'artigos', :users => 'usuarios'
   map.aliases :actions, :new => 'novo', :edit => 'editar', :logout => 'sair', :my => 'meus', :pending => 'pendentes'
 
+
   map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
   
-  map.resource :session 
+  map.resource :session
+  
+  map.connect "inicio", :controller => "home"
 
   map.with_options(:controller => "sessions") do |sessions|
     sessions.login "entrar", :action => "new"

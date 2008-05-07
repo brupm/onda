@@ -35,12 +35,23 @@ h1 {
 .intro h2 {
 	padding:.3em 0em;
 	font-size:1.7em;
-
 	letter-spacing:-1px;
+}
+.nav {
+	text-align: right;
 }
 .nav a {
 	text-transform: uppercase;
-	font-size: .8em;
+	font-size: .7em;
+	text-decoration: none;
+	background: #F9FFCF;
+	margin: 0 .2em;
+	padding: .5em .3em;
+
+}
+.nav a:hover {
+	background:#EBEBEB;
+	border-bottom: 4px solid #525252;
 }
 .day h3 {
 	font-size:.8em;
@@ -73,6 +84,9 @@ h1 {
 .post h2 a{
 	color:#475491;
 	font-size:1.2em;
+}
+.post h2 a:hover{
+	color: #297299;
 }
 .owner_time{
 	text-align:right;
@@ -122,5 +136,11 @@ label{
 .avatar {
 	float: right;
 	margin: 0 0em 0 0;
-
+}
+a.new{
+	background:#EBA5A5;
+	text-shadow: none;		
+}
+ a:hover.new{
+	color:#484848;
 }
