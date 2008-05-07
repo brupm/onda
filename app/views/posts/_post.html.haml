@@ -6,9 +6,13 @@
     
     %h2 
       = link_to post.title, post.url
-      - if logged_in? && @show_state
-        %small
-          = "[#{post.state_pt}]"
+      - if logged_in?
+        - if @show_state
+          %small
+            = "[#{post.state_pt}]"
+        - if post.can_edit?(current_user)
+          %small
+            = link_to "[editar]", edit_post_url(post)        
     %p
       = post.description
       - if logged_in? && @show_state && post.refused?

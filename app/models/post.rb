@@ -46,6 +46,10 @@ class Post < ActiveRecord::Base
     state == 'refused'
   end
   
+  def published?
+    state == 'published'
+  end
+  
   def state_pt
     STATE_PT[state]
   end
@@ -66,6 +70,9 @@ class Post < ActiveRecord::Base
     count(:conditions => {:state => 'pending'})
   end
   
+  def can_edit?(user)
+    user.admin? || self.user_id == user.id && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 1.hour.ago))
+  end
   
   private
   
