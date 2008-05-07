@@ -10,24 +10,37 @@ a{
 	padding:0;
 	margin:0;	
 }
+
 .logo h1 {
 	text-indent:-9999px;
-	height:175px;
-	width:175px;	
+	height:125px;
+	width:125px;	
 	background:url(/images/logo.png) no-repeat top right;	
 }
 .logo h1 a {
 	display:block;
-	height:175px;
-	width:175px;	
+	height:125px;
+	width:125px;	
+}
+h1 {
+	margin: 0 0 0 0em;
+	text-transform: uppercase;
+	font-size: 1.4em !important;
+	text-align:center;
 }
 .intro {
 	text-align:right;
 	text-shadow: #FFF 2px 2px 2px;	
 }
 .intro h2 {
-	padding:1.5em 0em;
-	font-size:1.2em;
+	padding:.3em 0em;
+	font-size:1.7em;
+
+	letter-spacing:-1px;
+}
+.nav a {
+	text-transform: uppercase;
+	font-size: .8em;
 }
 .day h3 {
 	font-size:.8em;
@@ -50,6 +63,7 @@ a{
 .content {
 	padding: .2em 1em .5em 1em;
 }
+
 .post h2{
 	color:#475491;
 	padding:0;
@@ -62,11 +76,46 @@ a{
 }
 .owner_time{
 	text-align:right;
-	font-style:italic;
+	font-size:.8em;
 }
 .footer {
 	padding-top:2em;
 	text-align:center;
 	font-size:.8em;
 	text-shadow: #FFF 2px 2px 2px;	
+}
+.form {
+	padding: 20px;
+	background: #F4F4F4;
+}
+.form h2{
+	font-size:1.5em;
+	text-transform: uppercase;
+	text-shadow: #FFF 2px 2px 2px;	
+	padding-bottom: 0;	
+	margin-bottom:0;
+}
+label{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: .8em;
+}
+.errors {
+	color: #500;
+	font-weight: bold;
+	padding: 0em 0em 1em 0em;
+	text-shadow: #FFF 2px 2px 2px;		
+}
+.errors h2{
+	font-size:1em;
+	padding: .5em 0em;
+}
+.toperrors {
+  text-align: center;
+	padding:.5em 0;
+}
+.submit{
+	padding: .5em .5em;
+	margin: 1em 0 0 0;
+	background: #E4E4E4;
 }

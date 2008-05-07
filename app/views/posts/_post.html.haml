@@ -12,7 +12,6 @@
     .owner_time
       postado por
       = link_to_unless post.user.any_url.blank?, post.user.nick, post.user.any_url
-      = link_to('(perfil)', edit_user_url(post.user)) if logged_in? && current_user.admin?
-      às
-      = post.posted_at.strftime("%H:%M")
+      \//
+      = link_to('Perfil', edit_user_url(post.user)) if logged_in? && current_user.admin?
   

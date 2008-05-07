@@ -1,5 +1,8 @@
-%h2 Edit Post
-#form
+.form
+  %h2 Edit Post
+  .errors
+    = error_messages_for :post
   - form_for @post do |f|
-    = render :partial => 'form', :locals => {:f => f} 
-    = submit_tag
+    .field.submit
+      = render :partial => 'form', :locals => {:f => f} 
+      = submit_tag

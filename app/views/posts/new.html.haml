@@ -1,9 +1,10 @@
-%h2 Novo Post
-
-= error_messages_for :post
-
-#form
+.form
+  %h2 Novo Post
+  .errors
+    = error_messages_for :post
   - form_for @post do |f|
     = render :partial => 'form', :locals => {:f => f}
-    = submit_tag 'Enviar', :disable_with => "Processando..."
-    = link_to 'Cancelar', root_url
+    .field.submit
+      = submit_tag 'Enviar', :disable_with => "Processando..."
+      ou
+      = link_to 'Cancelar', root_url

@@ -1,0 +1,17 @@
+.nav
+  = link_to 'Postar', new_post_url
+  \//        
+  = link_to 'RSS', formatted_posts_url(:rss)  
+  - if logged_in?
+    \//
+    = link_to 'Perfil', profile_url
+    \//
+    = link_to 'Meus Posts', my_posts_url
+    - if current_user.admin?
+      \//
+      = link_to 'Pendentes', pending_posts_url
+    \//
+    = link_to 'Sair', logout_url, :method => :delete
+  - else
+    \//
+    = link_to 'Entrar', login_url

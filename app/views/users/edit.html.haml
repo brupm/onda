@@ -1,4 +1,7 @@
-#form
+.form
+  %h2 Edita seu perfil
+  .errors
+    = error_messages_for :user
   - form_for @user do |f| 
     .field
       = f.label 'Apelido'
@@ -14,13 +17,13 @@
       = f.label 'e-mail' 
       %br
       = f.text_field 'email'
-      
+        
     - if current_user.admin?
       .field
-        = f.label 'admin'
+        = f.label 'Admin?'
         = f.check_box 'admin'
 
-    .field
+    .field.submit
       = submit_tag 'Salvar'
       ou
       = link_to 'Cancelar', posts_url

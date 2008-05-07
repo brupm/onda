@@ -15,14 +15,17 @@
     //    = check_box_tag 'remember_me'  
     //        
     //  %br
-    #open_id  
-      = label_tag 'OpenID' 
-      %br
-      = text_field_tag 'openid_url'
-      = submit_tag 'Entrar'
-      ou
-      = link_to 'Cancelar', root_url
+    .form
+      #open_id    
+        .errors
+          = flash[:error]
+        = label_tag 'OpenID' 
+        %br
+        = text_field_tag 'openid_url'
+        = submit_tag 'Entrar'
+        // ou
+        // = link_to 'Cancelar', root_url
       
-    = javascript_tag '', :id => "openid_url", :charset => "utf-8", :src => "https://www.idselector.com/selector/8692a472556173cd7a863aaefc76047320d75ad6"
+      = javascript_tag '', :id => "openid_url", :charset => "utf-8", :src => "https://www.idselector.com/selector/8692a472556173cd7a863aaefc76047320d75ad6"
 
 
