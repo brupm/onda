@@ -6,8 +6,17 @@
     
     %h2 
       = link_to post.title, post.url
+      - if logged_in? && @show_state
+        %small
+          = "[#{post.state_pt}]"
     %p
       = post.description
+      - if logged_in? && @show_state && post.refused?
+        %br
+        %strong
+          Motivo da rejeição:
+        = post.refused_text
+      
     - if logged_in? && current_user.admin? && post.pending?
       %p
         = link_to 'Publicar', publish_post_url(post), :method => :post

@@ -18,6 +18,9 @@
 #
 
 class Post < ActiveRecord::Base
+  
+  STATE_PT = {'pending' => "pendente", 'refused' => "rejeitado", 'published' => "publicado"}
+  
   belongs_to :user
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
   
@@ -25,6 +28,7 @@ class Post < ActiveRecord::Base
   attr_human_name :title => 'Título', :description => 'Texto', :url => "Link"
   
   validates_presence_of :user_id, :url, :title, :description
+  validates_length_of :description, :maximum => 290
   
   validates_presence_of :refused_text, :if => :refused?
   
@@ -40,6 +44,10 @@ class Post < ActiveRecord::Base
   
   def refused?
     state == 'refused'
+  end
+  
+  def state_pt
+    STATE_PT[state]
   end
   
   def self.find_latest(query_options = {})

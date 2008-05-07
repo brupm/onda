@@ -12,7 +12,8 @@ class PostsController < ApplicationController
   
   def my
     @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')
-    @title = "Meus posts"
+    @title = "Meus artigos"
+    @show_state = true
     render :action => :index
   end
   
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format| 
       if @post.save
-        flash[:notice] = "Post criado como sucesso."
+        flash[:notice] = "Artigo criado como sucesso."
         format.html { redirect_to my_posts_path }
         format.xml  { render :xml => @post, :status => :create }
       else
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
   
   def pending
     @posts = Post.paginate_pending :page => params[:page]
-    @title = "Posts pendentes"
+    @title = "Artigos pendentes"
     render :action => :index
   end
   
@@ -77,7 +78,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format| 
       if @post.update_attributes(params[:post])
-        flash[:notice] = "Post atualizado com sucesso."
+        flash[:notice] = "Artigo atualizado com sucesso."
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
       else
@@ -89,7 +90,7 @@ class PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      flash[:notice] = "Post apagado com sucesso."
+      flash[:notice] = "Artigo apagado com sucesso."
       respond_to do |format|
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
