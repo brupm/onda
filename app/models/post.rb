@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
   
-  attr_protected :state, :authorized_by_id, :user_id, :published_at
+  attr_protected :state, :authorized_by_id, :user_id, :published_at, :refused_by_id, :refused_text
   attr_human_name :title => 'Título', :description => 'Texto', :url => "Link"
   
   validates_presence_of :user_id, :url, :title, :description
@@ -46,6 +46,16 @@ class Post < ActiveRecord::Base
     with_scope(:find => {:conditions => {:state => 'published'}, :order => 'published_at DESC'} ) do
       find(:all, query_options)
     end
+  end
+  
+  def self.find_pending(query_options = {})
+    with_scope(:find => {:conditions => {:state => 'pending'}, :order => 'created_at'} ) do
+      find(:all, query_options)
+    end
+  end
+  
+  def self.pending_count
+    count(:conditions => {:state => 'pending'})
   end
   
   

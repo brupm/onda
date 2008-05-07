@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     sessions.logout "logout", :action => "destroy", :conditions => {:method => :delete}
   end
 
-  map.resources :posts, :collection => {:pending => :get, :my => :get}, :member => {:publish => :post}
+  map.resources :posts, :collection => {:pending => :get, :my => :get}, :member => {:publish => :post, :refuse => :post}
   map.resources :users
   map.profile 'profile', :controller => "users", :action => "edit"
 

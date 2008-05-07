@@ -2,8 +2,10 @@
 !!! 1.1
 %html
   %head
-    %title Ruby.aOnda.com
-    = stylesheet_link_tag  "reset", "style", "960", "text" 
+    %title RubyOnda.com
+    = stylesheet_link_tag  "reset", "style", "960", "text"
+    = auto_discovery_link_tag :rss, formatted_posts_url(:rss), :title => 'RubyOnda.com'
+    = javascript_include_tag 'prototype'
   %body
     .container_12
       .grid_8.prefix_2
@@ -16,6 +18,7 @@
       .grid_8.prefix_2
         .errors.toperrors
           = flash[:notice]
+          = flash[:error]
         = yield
       .grid_8.prefix_2.footer
         = render :partial => 'shared/footer' 

@@ -20,9 +20,8 @@
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
-  # Virtual attribute for the unencrypted password
-  attr_accessor :password
-  attr_accessible :email, :identity_url, :url, :nick
+  
+  attr_accessible :email, :url, :nick
   
   has_many :posts do
     def published; find(:all, :conditions => {:state => "published"}) end
@@ -30,10 +29,6 @@ class User < ActiveRecord::Base
   
   def has_min_authorized_posts?
     self.posts.published.size >= 10
-  end
-  
-  def any_url
-    url.blank? ? identity_url : url
   end
   
   def remember_token?
@@ -63,6 +58,8 @@ class User < ActiveRecord::Base
   
 end
 
+  # # Virtual attribute for the unencrypted password
+  # attr_accessor :password
   # validates_presence_of     :login, :email
   # validates_presence_of     :password,                   :if => :password_required?
   # validates_presence_of     :password_confirmation,      :if => :password_required?

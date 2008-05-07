@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
-  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish]
-  before_filter :login_required, :only => [ :new, :update ]
+  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse]
+  before_filter :login_required, :only => [ :new, :update, :pending, :publish, :refuse ]
   
   def index    
     respond_to do |format|
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format| 
       if @post.save
-        flash[:notice] = "Post was successfully created."
+        flash[:notice] = "Post criado como sucesso."
         format.html { redirect_to my_posts_path }
         format.xml  { render :xml => @post, :status => :create }
       else
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   end
   
   def pending
-    @posts = Post.paginate :page => params[:page] , :per_page => 10, :conditions => {:state => 'pending'}, :order => 'created_at'
+    @posts = Post.paginate_pending :page => params[:page]
     @title = "Posts pendentes"
     render :action => :index
   end
@@ -50,24 +50,25 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.save
-        flash[:notice] = "Post was successfully published."
+        flash[:notice] = "Publicado com sucesso."
         format.html { redirect_to pending_posts_path }
       else
-        flash[:notice] = "Post was successfully published."
+        flash[:notice] = "Problemas na publicação."
         format.html { redirect_to pending_posts_path }
       end
     end
   end
   
   def refuse
-    @post.authorized_by_id = current_user.id
+    @post.refused_by_id = current_user.id
+    @post.refused_text = params[:post][:refused_text]
     
     respond_to do |format|
       if @post.save
-        flash[:notice] = "Post was successfully published."
+        flash[:notice] = "Rejeitado com sucesso."
         format.html { redirect_to pending_posts_path }
       else
-        flash[:notice] = "Post was successfully published."
+        flash[:notice] = "Erro ao rejeitar."
         format.html { redirect_to pending_posts_path }
       end
     end
@@ -76,7 +77,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format| 
       if @post.update_attributes(params[:post])
-        flash[:notice] = "Post was successfully created."
+        flash[:notice] = "Post atualizado com sucesso."
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
       else
@@ -88,7 +89,7 @@ class PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      flash[:notice] = "Post was successfully deleted"
+      flash[:notice] = "Post apagado com sucesso."
       respond_to do |format|
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
