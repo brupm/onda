@@ -30,7 +30,11 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format| 
       if @post.save
-        flash[:notice] = "Artigo criado como sucesso."
+        if current_user.admin? || current_user.has_min_authorized_posts?
+          flash[:notice] = "Artigo criado como sucesso."
+        else
+          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo está em moderação por não ter pelo menos 10 artigos publicados."
+        end
         format.html { redirect_to my_posts_path }
         format.xml  { render :xml => @post, :status => :create }
       else
