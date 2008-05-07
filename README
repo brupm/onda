@@ -1,4 +1,6 @@
 == Dependecies
 
   haml > 1.9
+  ruby-openid > 2.04
+  
   

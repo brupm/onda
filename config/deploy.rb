@@ -13,10 +13,11 @@ namespace :vlad do
   desc 'Runs vlad:update, vlad:symlink, vlad:migrate and vlad:start'
   task :deploy => ['vlad:update', 'vlad:symlink', 'vlad:migrate', 'vlad:stop_app', 'vlad:start_app']
 
-  #desc 'Symlinks your custom directories'
-  #remote_task :symlink, :roles => :app do
-  #  run "ln -s #{shared_path}/assets #{latest_release}/public/assets" 
-  #end
+  desc 'Symlinks your custom directories'
+  remote_task :symlink, :roles => :app do
+#    run "ln -s #{shared_path}/assets #{latest_release}/public/assets" 
+    run "ln -s #{shared_path}/database.yml #{current_release}/config/database.yml"
+  end
 
   #desc 'Setup your custom directories in shared.'
   #remote_task :setup_shared, :roles => :app do

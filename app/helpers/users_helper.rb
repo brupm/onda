@@ -1,4 +1,4 @@
-require 'MD5'
+require 'md5'
 
 module UsersHelper
   
