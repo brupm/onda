@@ -1,6 +1,9 @@
 .post 
   .post_top
   .content
+    .avatar
+      = avatar_tag(post.user.email)
+    
     %h2 
       = link_to post.title, post.url
     %p
@@ -8,6 +11,7 @@
     - if logged_in? && current_user.admin? && post.pending?
       %p
         = link_to 'Publicar', publish_post_url(post), :method => :post
+        \//
         = link_to_function 'Rejeitar', "$('refuse_#{dom_id(post)}').show(); $('link_refuse_#{dom_id(post)}').hide()", :id => "link_refuse_#{dom_id(post)}"
         - form_for post, :url => refuse_post_url(post), :html => {:style => "display: none", :id => "refuse_#{dom_id(post)}", :method => :post} do |f|
           = f.text_area :refused_text, :size => "50x10"
@@ -15,7 +19,7 @@
           = submit_tag "Rejeitar"
           ou
           = link_to_function "Cancelar", "$('refuse_#{dom_id(post)}').hide(); $('link_refuse_#{dom_id(post)}').show()"
-    = avatar_tag(post.user.email)
+    
     .owner_time
       postado por
       = link_to_unless post.user.url.blank?, post.user.nick, post.user.url

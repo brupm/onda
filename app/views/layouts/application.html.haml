@@ -2,7 +2,7 @@
 !!! 1.1
 %html
   %head
-    %title RubyOnda.com
+    %title RubyOnda.com - Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais 
     = stylesheet_link_tag  "reset", "style", "960", "text"
     = auto_discovery_link_tag :rss, formatted_posts_url(:rss), :title => 'RubyOnda.com'
     = javascript_include_tag 'prototype'
@@ -23,3 +23,4 @@
       .grid_8.prefix_2.footer
         = render :partial => 'shared/footer' 
         
+      = render :partial => 'shared/google'
