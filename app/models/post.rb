@@ -42,7 +42,7 @@ class Post < ActiveRecord::Base
   def validate
     if !hidden.nil?  
       if hidden.length > 0
-        errors.add("spam bot detected, seu post ")
+        errors.add("spam bot detectado, seu post ")
       end
     end
   end
@@ -68,7 +68,9 @@ class Post < ActiveRecord::Base
   end
   
   def full_url
-    url.include?("http://") ? url : "http://#{url}" 
+    unless url.nil?
+      url.include?("http://") ? url : "http://#{url}" 
+    end
   end
   
   def self.find_latest(query_options = {})

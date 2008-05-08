@@ -36,7 +36,9 @@ class User < ActiveRecord::Base
   end
   
   def full_url
-    url.include?("http://") ? url : "http://#{url}" 
+    unless url.nil?
+      url.include?("http://") ? url : "http://#{url}" 
+    end
   end
   
   

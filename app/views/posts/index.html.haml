@@ -1,7 +1,7 @@
 -if @title
   %h1
     = @title
-
+  
 - @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
   .grid_8.day
     %h3 
@@ -9,5 +9,4 @@
     .post
       = render :partial =>"post", :collection => posts
 
-#pagination
-  = will_paginate @posts
+
