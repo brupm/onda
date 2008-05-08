@@ -173,6 +173,9 @@ a.new{
 .pagination a{
 
 }
+.red {
+	color: #720A25 !important;
+}
 
 /*************************************
  +Clearfix Hack
