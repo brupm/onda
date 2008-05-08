@@ -12,7 +12,7 @@ class TweetPosts
       max_size_truncate = max_size - "...".chars.length
       title = post.title.strip
       title = (title.chars.length > max_size ? title.chars[0...max_size_truncate] + "..." : title).to_s
-      twit.post "#{title} #{post_path(post.permalink)}" 
+      twit.post "#{title} http://rubyonda.com/artigos/#{post.permalink}" 
       post.update_attribute(:tweeted_at, Time.zone.now)
     end
   end
