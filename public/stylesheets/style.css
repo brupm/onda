@@ -159,9 +159,19 @@ a.new{
 .bla {
 	display: none;
 }
+.bottom {
+	display:block;
+	clear:both;
+}
 .pagination {
-	padding: 2em;
-	background: red;
+	text-align: center;
+	padding: .8em;
+	margin: 2em 2em 2em 3em;
+	border-top: 18px solid #EBEBEB;
+	background: #E4E4E4;
+}
+.pagination a{
+
 }
 
 /*************************************

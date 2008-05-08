@@ -9,4 +9,5 @@
     .post
       = render :partial =>"post", :collection => posts
 
-
+.bottom.clearfix
+  = will_paginate @posts
