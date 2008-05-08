@@ -10,7 +10,5 @@
       = link_to "Pendentes(#{Post.pending_count})", pending_posts_url, :class => 'red'
 
     = link_to 'Sair', logout_url, :method => :delete
-    = link_to 'RSS', formatted_posts_url(:rss), :class => 'rss'
   - else
     = link_to 'Entrar', login_url
-

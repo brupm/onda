@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def edit; end
   
   def update
+    
     respond_to do |format| 
       if @user.update_attributes(params[:user])
         flash[:notice] = "Perfil atualizado com sucesso."

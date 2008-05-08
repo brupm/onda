@@ -38,7 +38,8 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :refused_text, :if => :refused?
   
-  before_validation :set_state
+  before_validation_on_create :set_initial_state
+  before_validation_on_update :set_state
   
   before_save :set_permalink
   
@@ -108,22 +109,20 @@ class Post < ActiveRecord::Base
   
   private
   
+  def set_initial_state
+    if user_id && (self.user.admin? || user.has_min_authorized_posts?)
+      self.state = 'published'
+      self.published_at = Time.zone.now
+    end
+  end
+  
   def set_state
-    if user_id       
-      if state.blank?
-        if self.user.admin? || user.has_min_authorized_posts?
-          self.state = 'published'
-          self.published_at = Time.now
-        else
-          self.state = 'pending'
-        end
-      elsif !refused_by_id.blank? && state != 'refused'
+      if !refused_by_id.blank? && state != 'refused'
         self.state = 'refused'
       elsif state == 'pending' && !authorized_by_id.blank?
         self.state = 'published'
-        self.published_at = Time.now
+        self.published_at = Time.zone.now
       end
-    end
   end
 
   
