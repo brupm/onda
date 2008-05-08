@@ -5,7 +5,7 @@
     = link_to 'Perfil', profile_url
 
     = link_to 'Meus Artigos', my_posts_url
-    - if current_user.admin?
+    - if current_user.admin? && Post.pending_count > 0
 
       = link_to "Pendentes(#{Post.pending_count})", pending_posts_url, :class => 'red'
 

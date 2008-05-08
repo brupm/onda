@@ -6,3 +6,8 @@ OpenIdAuthentication::Result::ERROR_MESSAGES.merge(
       :canceled     => "A verificação do OpenID foi cancelada",
       :failed       => "A verificação do OpenID falhou",
       :setup_needed => "A verificação do OpenID precisa ser configurada")
+      
+
+OVERLOAD_TO_PARAM = "yes"
+TagList.delimiter = " "
+      
