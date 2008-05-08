@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
            @user.nick = registration['nickname']
            @user.email = registration['email']
            @user.save(false)
+           session[:return_to] = profile_url
          end
          self.current_user = @user
          successful_login
