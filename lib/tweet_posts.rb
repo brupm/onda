@@ -13,6 +13,7 @@ class TweetPosts
       title = post.title.strip
       title = (title.chars.length > max_size ? title.chars[0...max_size_truncate] + "..." : title).to_s
       twit.post "#{title} #{post.full_url}"
+      post.update_attribute(:tweeted_at, Time.zone.now)
     end
   end
 
