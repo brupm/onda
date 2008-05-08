@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080504223159
+# Schema version: 20080508150826
 #
 # Table name: posts
 #
@@ -15,6 +15,9 @@
 #  authorized_by_id :integer(11)
 #  refused_by_id    :integer(11)
 #  refused_text     :string(200)
+#  permalink        :string(255)
+#  cached_tag_list  :string(255)
+#  tweeted_at       :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
