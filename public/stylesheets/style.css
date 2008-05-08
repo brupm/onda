@@ -193,6 +193,10 @@ a.new{
 	text-shadow: #FFF 2px 2px 2px;		
 	background: #DDDEDC;
 	padding: 4px;	
+	margin: 2px 0;
+}
+.tag_cloud a:hover{
+ 	background: #C6C7C5;
 }
 .tag_title{
 	text-transform: uppercase;

@@ -18,6 +18,7 @@ namespace :vlad do
   remote_task :symlink, :roles => :app do
 #    run "ln -s #{shared_path}/assets #{latest_release}/public/assets" 
     run "ln -s #{shared_path}/database.yml #{current_release}/config/database.yml"
+    run "ln -s #{shared_path}/private.rb #{current_release}/config/initializers/private.rb"    
   end
 
   #desc 'Setup your custom directories in shared.'
