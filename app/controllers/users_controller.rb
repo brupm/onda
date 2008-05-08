@@ -24,7 +24,10 @@ class UsersController < ApplicationController
   def update
     
     respond_to do |format| 
-      if @user.update_attributes(params[:user])
+      @user.attributes = params[:user]
+      @user.admin = params[:user][:admin] if current_user.admin?
+      puts "ADMIN #{params[:user][:admin]}"
+      if @user.save
         flash[:notice] = "Perfil atualizado com sucesso."
         format.html { redirect_to posts_path }
         format.xml  { head :ok }
