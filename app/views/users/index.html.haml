@@ -1,0 +1,27 @@
+.form
+  %h2 
+    Users
+  %table
+    %tr
+      %th ID
+      %th Nick
+      %th Email
+      %th URL
+      %th Admin?
+      %th Posts
+    - @users.each do |user|
+      %tr
+
+        %td
+          = user.id
+        %td
+          = link_to user.nick, edit_user_path(user)
+        %td
+          = user.email
+        %td
+          = link_to user.full_url, user.full_url
+        %td
+          = user.admin        
+        %td
+          = user.posts.count
+        

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :fetch_user, :only =>   [:edit, :update]
+  before_filter :authenticate, :only => :index
 
   # def create
   #   cookies.delete :auth_token
@@ -37,6 +38,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def index
+    @users = User.find(:all, :order => "id ASC")
+  end
+  
   protected
 
   def fetch_user
@@ -47,6 +52,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "rubyonda" && password == "robertodante"
+    end
+  end
+
   
 
 end

@@ -231,3 +231,31 @@ a.new{
 	.clearfix {display:block;}
 	/* End hide from IE Mac */
    
+
+
+	table {
+		font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 320px;
+		}
+
+	th {
+		padding: 0 0.5em;
+		text-align: left;
+		border-top: 1px solid #CCC;		
+		}
+
+
+	td, th {
+		border-bottom: 1px solid #CCC;
+		padding: 0 0.5em;
+		}
+
+	td:first-child {
+		width: 190px;
+		}
+
+	td+td {
+		border-left: 1px solid #CCC;
+		text-align: center;
+		}
