@@ -11,3 +11,7 @@
 #   :user_name => "email@domain.com",
 #   :password => "senha"
 # }
+# 
+# 
+# ENV['TWITTER_USER'] = 'twitter_user'
+# ENV['TWITTER_PASS'] = '************'
