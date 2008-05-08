@@ -12,9 +12,11 @@
         .grid_5.alpha.intro
           %h2 Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais
           = render :partial => "shared/menu"
-        .grid_3.omega.logo
+        .grid_2.logo
           %h1 
             = link_to "Ruby Onda", root_path
+        .grid_1.omega.subscribe
+          <a href="http://feeds.feedburner.com/RubyOnda" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png"/></a>&nbsp;<a href="http://feeds.feedburner.com/RubyOnda" rel="alternate" type="application/rss+xml">Assine RSS</a>    
       .grid_8.prefix_2
         .errors.toperrors
           = flash[:notice]

@@ -14,3 +14,8 @@
   = f.label 'Texto (máximo de 290 letras, não é necessário incluir o link)'
   %br
   = f.text_area 'description', :rows => 6, :cols => 70
+  
+.field
+  = f.label 'Tags (separadas por um spaço)'
+  %br
+  = f.text_field :tag_list

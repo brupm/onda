@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse, :show]
   before_filter :login_required, :only => [ :new, :update, :pending, :publish, :refuse ]
+  before_filter :tag_cloud, :only => [:index, :my, :search, :pending]
   
   def index    
     respond_to do |format|
@@ -106,6 +107,14 @@ class PostsController < ApplicationController
         format.xml  { head :ok }
       end
     end
+  end
+  
+  def search
+    @posts = Post.find_tagged_with(params[:id])
+  end
+
+  def tag_cloud
+    @tags = Post.tag_counts
   end
 
   protected

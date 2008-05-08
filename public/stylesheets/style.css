@@ -176,7 +176,39 @@ a.new{
 .red {
 	color: #720A25 !important;
 }
+.css1 { font-size: .5em; }
+.css2 { font-size: .7em; }
+.css3 { font-size: .8em; }
+.css4 { font-size: 1em; }
 
+.tag_cloud {
+	text-align:center;
+	clear: both;
+	padding: .8em;
+	margin: 2em 2em 1em 2.5em;	
+}
+.tag_cloud a{
+	font-weight:normal !important;
+	text-shadow: #FFF 2px 2px 2px;		
+	background: #DDDEDC;
+	padding: 4px;	
+}
+.tag_title{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: .8em;
+	padding-bottom: .5em;
+}
+.subscribe {
+	padding-top: 2.2em;
+	text-align: center;
+}
+.subscribe a{
+	text-decoration: none;
+	font-size: .8em;
+	text-transform: uppercase;
+	text-align: center;	
+}
 /*************************************
  +Clearfix Hack
 *************************************/

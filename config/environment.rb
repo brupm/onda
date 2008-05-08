@@ -71,3 +71,4 @@ Rails::Initializer.run do |config|
 end
 
 OVERLOAD_TO_PARAM = "yes"
+TagList.delimiter = " "

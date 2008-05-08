@@ -19,6 +19,9 @@
 
 class Post < ActiveRecord::Base
   
+  acts_as_taggable
+  set_cached_tag_list_column_name "cached_tag_list"
+  
   STATE_PT = {'pending' => "pendente", 'refused' => "rejeitado", 'published' => "publicado"}
   
   attr_accessor :hidden
