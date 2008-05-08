@@ -36,6 +36,7 @@ class PostsController < ApplicationController
         else
           flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo está em moderação por não ter pelo menos 10 artigos publicados."
         end
+        Notifier.deliver_new_post(@post)
         format.html { redirect_to my_posts_path }
         format.xml  { render :xml => @post, :status => :create }
       else

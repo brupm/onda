@@ -27,7 +27,6 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "haml"
-  #config.gem "ruby-openid"
   
 
   # Only load the plugins named here, in the order given. By default, all plugins 
@@ -69,6 +68,3 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
 end
-
-OVERLOAD_TO_PARAM = "yes"
-TagList.delimiter = " "

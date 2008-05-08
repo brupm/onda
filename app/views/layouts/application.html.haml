@@ -10,7 +10,9 @@
     .container_12
       .grid_8.prefix_2
         .grid_5.alpha.intro
-          %h2 Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais
+          %h2 
+            Na crista da 
+            = link_to("onda", home_path) + ", trazendo as novidades sobre Ruby, Rails e mais"
           = render :partial => "shared/menu"
         .grid_2.logo
           %h1 
