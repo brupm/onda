@@ -15,13 +15,13 @@
         %td
           = user.id
         %td
-          = link_to user.nick, edit_user_path(user)
+          = link_to user.nick, edit_user_path(user)  unless user.nick.nil?
         %td
-          = user.email
-        %td
-          = link_to user.full_url, user.full_url
+          = user.email rescue "" 
+        %td 
+          = link_to user.full_url, user.full_url unless user.full_url.nil?
         %td
           = user.admin        
         %td
-          = user.posts.count
+          = user.posts.count rescue 0
         
