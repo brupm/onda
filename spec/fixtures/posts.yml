@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20080508150826
+# Schema version: 20080510134432
 #
 # Table name: posts
 #
 #  id               :integer(11)     not null, primary key
-#  title            :string(255)     default(""), not null
-#  url              :string(255)     default(""), not null
+#  title            :string(255)     not null
+#  url              :string(255)     not null
 #  description      :text            not null
 #  user_id          :integer(11)     not null
 #  state            :string(255)     default("pending"), not null

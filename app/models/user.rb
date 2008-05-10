@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080508150826
+# Schema version: 20080510134432
 #
 # Table name: users
 #
@@ -15,7 +15,7 @@
 #  identity_url              :string(255)
 #  nick                      :string(15)
 #  url                       :string(100)
-#  admin                     :boolean(1)
+#  role                      :string(6)       default("writer")
 #
 
 require 'digest/sha1'
