@@ -1,0 +1,42 @@
+%h1 Artigos Pendentes
+  
+- @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
+  .grid_8.day
+    %h3 
+      = posts.first.posted_at.strftime("%d de %B, %Y")
+    - @posts.each do |post|
+      .post 
+        .post_top
+        .content
+          - if current_user.admin?
+            .avatar
+              = avatar_tag(post.user.email)
+          %h2 
+            = link_to post.title, post.full_url
+          %p
+            = h post.description
+            %p
+              = link_to 'Publicar', publish_post_url(post.permalink), :method => :post
+              \//
+              = link_to_function 'Rejeitar', "$('refuse_#{dom_id(post.id)}').show(); $('link_refuse_#{dom_id(post.id)}').hide()", :id => "link_refuse_#{dom_id(post.id)}"
+              \//
+              = link_to "Editar", edit_post_url(post.permalink)
+              - form_for post, :url => refuse_post_url(post.permalink), :html => {:style => "display: none", :id => "refuse_#{dom_id(post.id)}", :method => :post} do |f|
+                = f.text_area :refused_text, :size => "50x10"
+                %br
+                = submit_tag "Rejeitar"
+                ou
+                = link_to_function "Cancelar", "$('refuse_#{dom_id(post.id)}').hide(); $('link_refuse_#{dom_id(post.id)}').show()"
+
+          .owner_time
+            - if current_user.admin?
+              postado por
+              = link_to_unless post.user.url.blank?, post.user.nick, post.user.full_url
+              - if logged_in? && current_user.admin?
+                \//
+                = link_to('Perfil', edit_user_url(post.user)) 
+              \//
+            = link_to "Link Permanente", post_path(post.permalink)
+
+.bottom.clearfix
+  = will_paginate @posts

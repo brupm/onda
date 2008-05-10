@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :fetch_user, :only =>   [:edit, :update]
-  before_filter :authenticate, :only => :index
+  before_filter :only_admin, :only => :index
 
   # def create
   #   cookies.delete :auth_token
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     
     respond_to do |format| 
       @user.attributes = params[:user]
-      @user.admin = params[:user][:admin] if current_user.admin?
+      @user.role = params[:user][:role] if current_user.admin?
       if @user.save
         flash[:notice] = "Perfil atualizado com sucesso."
         format.html { redirect_to posts_path }
@@ -45,19 +45,12 @@ class UsersController < ApplicationController
   protected
 
   def fetch_user
-    if current_user.admin? && params[:id]
+    if current_user.editor? && params[:id]
       @user = User.find(params[:id])
     else
       @user = current_user
     end
   end
-  
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "rubyonda" && password == "robertodante"
-    end
-  end
 
-  
 
 end

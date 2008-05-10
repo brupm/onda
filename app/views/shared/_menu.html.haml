@@ -1,14 +1,8 @@
 .nav
   = link_to 'Enviar Artigo', new_post_url, :class => 'new' 
   - if logged_in?
-
     = link_to 'Perfil', profile_url
-
     = link_to 'Meus Artigos', my_posts_url
-    - if current_user.admin? && Post.pending_count > 0
-
+    - if current_user.editor? && Post.pending_count > 0
       = link_to "Pendentes(#{Post.pending_count})", pending_posts_url, :class => 'red'
-
     = link_to 'Sair', logout_url, :method => :delete
-  - else
-    = link_to 'Entrar', login_url

@@ -97,7 +97,9 @@ class Post < ActiveRecord::Base
   end
   
   def can_edit?(user)
-    user.admin? || self.user_id == user.id && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 1.hour.ago))
+    return true if user.admin?
+    return true if (user.editor? || self.user_id == user.id ) && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 10.minutes.ago))
+    false
   end
   
   if OVERLOAD_TO_PARAM == "yes" 
@@ -113,7 +115,7 @@ class Post < ActiveRecord::Base
   private
   
   def set_initial_state
-    if user_id && (self.user.admin? || user.has_min_authorized_posts?)
+    if user_id && (self.user.editor? || user.has_min_authorized_posts?)
       self.state = 'published'
       self.published_at = Time.zone.now
     end

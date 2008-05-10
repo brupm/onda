@@ -1,0 +1,27 @@
+%h1 Meus Artigos
+  
+- @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
+  .grid_8.day
+    %h3 
+      = posts.first.posted_at.strftime("%d de %B, %Y")
+    - @posts.each do |post|
+      .post 
+        .post_top
+        .content
+          %h2 
+            = link_to post.title, post.full_url
+            %small
+              = " - #{post.state_pt}"
+              = link_to "// editar", edit_post_url(post.permalink)
+          %p
+            = h post.description
+            - if post.refused?
+              %br
+              %strong
+                Motivo da rejeição:
+              = post.refused_text
+          .owner_time
+            = link_to "Link Permanente", post_path(post.permalink)
+
+.bottom.clearfix
+  = will_paginate @posts

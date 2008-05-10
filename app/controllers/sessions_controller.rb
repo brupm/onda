@@ -29,8 +29,8 @@ class SessionsController < ApplicationController
        if result.successful?
          @user = User.find_or_initialize_by_identity_url(identity_url)
          if @user.new_record?
-           @user.nick = registration['nickname']
-           @user.email = registration['email']
+           @user.nick = registration['nickname'] unless User.exists?(:nick => "#{registration['nickname']}")
+           @user.email = registration['email'] unless User.exists?(:email => "#{registration['email']}")
            @user.save(false)
            session[:return_to] = profile_url
          end
@@ -62,6 +62,6 @@ class SessionsController < ApplicationController
        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
      end
      redirect_back_or_default('/')
-     flash[:notice] = "Funcionou! Você foi identificado."
+     flash[:notice] = "Você foi identificado com sucesso!"
    end
 end

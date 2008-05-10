@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
   
   attr_accessible :email, :url, :nick
   
+  validates_inclusion_of :role, :in => %w( admin writer editor )
+  validates_presence_of :email, :nick, :identity_url
+  validates_uniqueness_of :email, :nick, :identity_url
+  
   has_many :posts do
     def published; find(:all, :conditions => {:state => "published"}) end
   end
@@ -39,6 +43,14 @@ class User < ActiveRecord::Base
     unless url.nil?
       url.include?("http://") ? url : "http://#{url}" 
     end
+  end
+  
+  def admin?
+    self.role == 'admin'
+  end
+  
+  def editor?
+    ['admin', 'editor'].include?(self.role)
   end
   
   

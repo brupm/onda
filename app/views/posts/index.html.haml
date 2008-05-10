@@ -1,13 +1,8 @@
--if @title
-  %h1
-    = @title
-  
 - @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
   .grid_8.day
     %h3 
       = posts.first.posted_at.strftime("%d de %B, %Y")
-    .post
-      = render :partial =>"post", :collection => posts
+    = render :partial =>"post", :collection => posts
 .tag_cloud
   .tag_title
     Tags

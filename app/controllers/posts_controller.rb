@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 
   before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse, :show]
-  before_filter :login_required, :only => [ :new, :update, :pending, :publish, :refuse ]
+  before_filter :login_required, :only => [ :new, :update, :pending, :edit, :update, :destroy, :publish, :refuse ]
+  before_filter :only_editor, :only => [ :publish, :refuse, :pending ]
+  before_filter :only_admin, :only => [ :unpublish ]
   before_filter :tag_cloud, :only => [:index, :my, :search, :pending]
   
   def index    
@@ -12,10 +14,7 @@ class PostsController < ApplicationController
   end
   
   def my
-    @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')
-    @title = "Meus artigos"
-    @show_state = true
-    render :action => :index
+    @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
   end
   
   def new
@@ -31,13 +30,13 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format| 
       if @post.save
-        if current_user.admin? || current_user.has_min_authorized_posts?
+        if current_user.editor? || current_user.has_min_authorized_posts?
           flash[:notice] = "Artigo criado como sucesso."
         else
           flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo está em moderação por não ter pelo menos 10 artigos publicados."
         end
         begin
-          Notifier.deliver_new_post(@post)
+          Notifier.deliver_new_post(@post) if ENV['RAILS_ENV'] == 'production'
         rescue
           logger.warn { "could not send email" }
         ensure
@@ -53,8 +52,6 @@ class PostsController < ApplicationController
   
   def pending
     @posts = Post.paginate_pending :page => params[:page]
-    @title = "Artigos pendentes"
-    render :action => :index
   end
   
   def publish
@@ -63,7 +60,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         flash[:notice] = "Publicado com sucesso."
-        format.html { redirect_to pending_posts_path }
+        format.html { redirect_to posts_path }
       else
         flash[:notice] = "Problemas na publicação."
         format.html { redirect_to pending_posts_path }
@@ -71,9 +68,15 @@ class PostsController < ApplicationController
     end
   end
   
+  def unpublish
+    @post.authorized_by_id = nil
+    @post.refused_text = "Este artigo foi retirado por algum administrador."
+    refuse
+  end
+  
   def refuse
     @post.refused_by_id = current_user.id
-    @post.refused_text = params[:post][:refused_text]
+    @post.refused_text ||= params[:post][:refused_text]
     
     respond_to do |format|
       if @post.save
@@ -86,13 +89,18 @@ class PostsController < ApplicationController
     end
   end
   
-  def edit; end
+  def edit
+    unless @post.can_edit?(current_user)
+      flash[:notice] = "Este artigo não pode ser editar por você, entre em contato com algum administrador."
+      redirect_to posts_url
+    end
+  end
   
   def update
     respond_to do |format| 
       if @post.update_attributes(params[:post])
         flash[:notice] = "Artigo atualizado com sucesso."
-        format.html { redirect_to posts_path }
+        format.html { redirect_to post_path(@post) }
         format.xml  { head :ok }
       else
         format.html { render :action => "new" }
@@ -102,16 +110,6 @@ class PostsController < ApplicationController
   end
   
   def show; end
-  
-  def destroy
-    if @post.destroy
-      flash[:notice] = "Artigo apagado com sucesso."
-      respond_to do |format|
-        format.html { redirect_to posts_path }
-        format.xml  { head :ok }
-      end
-    end
-  end
   
   def search
     @posts = Post.find_tagged_with(params[:id])

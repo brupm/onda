@@ -1,9 +1,9 @@
 .form
   %h2
-    = current_user.id == @user.id ? 'Seu perfil' : "Editando Perfil"
+    = (current_user.id == @user.id) ? 'Seu perfil' : "Editando Perfil"
   .errors
-    = error_messages_for :user
-  - form_for @user do |f| 
+    = error_messages_for :user, :message => "Dados inválidos"
+  - form_for @user do |f|
     .field
       = f.label 'Apelido'
       %br
@@ -21,9 +21,9 @@
         
     - if current_user.admin?
       .field
-        = f.label 'Admin?'
-        = f.check_box 'admin'
-
+        = f.label 'Responsabilidade'
+        = f.select 'role', [["Escritor","writer"], ["Editor","editor"], ["Administrador","admin"]]
+        
     .field.submit
       = submit_tag 'Salvar'
       ou
