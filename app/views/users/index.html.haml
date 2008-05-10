@@ -1,27 +1,26 @@
-.form
-  %h2 
-    Users
-  %table
+%h2 
+  Users
+%table
+  %tr
+    %th ID
+    %th Nick
+    %th Email
+    %th URL
+    %th Admin?
+    %th Posts
+  - @users.each do |user|
     %tr
-      %th ID
-      %th Nick
-      %th Email
-      %th URL
-      %th Admin?
-      %th Posts
-    - @users.each do |user|
-      %tr
 
-        %td
-          = user.id
-        %td
-          = link_to user.nick, edit_user_path(user)  unless user.nick.nil?
-        %td
-          = user.email rescue "" 
-        %td 
-          = link_to user.full_url, user.full_url unless user.full_url.nil?
-        %td
-          = user.admin        
-        %td
-          = user.posts.count rescue 0
-        
+      %td
+        = user.id
+      %td
+        = link_to user.nick, edit_user_path(user)  unless user.nick.nil?
+      %td
+        = user.email rescue "" 
+      %td 
+        = link_to user.full_url, user.full_url unless user.full_url.nil?
+      %td
+        = user.admin        
+      %td
+        = user.posts.count rescue 0
+      
