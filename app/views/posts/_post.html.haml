@@ -15,6 +15,9 @@
     .owner_time
       postado por
       = link_to_unless post.user.url.blank?, post.user.nick, post.user.full_url
+      - unless post.user.twitter_user.blank?
+        \//
+        = link_to "@#{post.user.twitter_user}", "http://twitter.com/#{post.user.twitter_user}"
       - if logged_in? && current_user.admin?
         \//
         = link_to('Perfil', edit_user_url(post.user)) 
