@@ -18,6 +18,12 @@
       = f.label 'e-mail (não publico)' 
       %br
       = f.text_field 'email'
+      
+    .field
+      = f.label 'Usuário Twitter' 
+      %br
+      @
+      = f.text_field 'twitter_user', :size => 28     
         
     - if current_user.admin?
       .field
