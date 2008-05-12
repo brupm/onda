@@ -2,7 +2,18 @@
 !!! 1.1
 %html
   %head
-    %title RubyOnda.com - Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais 
+    %title RubyOnda.com - Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais
+    %meta{'name' => 'author', :content => 'Bruno Miranda, Roberto Soares'}/
+    %meta{'name' => 'keywords', :content => "#{Tag.find(:all).join(', ')}"}/
+    %meta{'name' => 'description', :content => "Novidades sobre Ruby, Rails e mais"}/
+    %meta{'name' => 'copyright', :content => "Bruno Miranda, Roberto Soares"}/
+    %meta{'name' => 'robots', :content => "ALL"}/
+    %meta{'name' => 'distribution', :content => "Global"}/
+    %meta{'name' => 'rating', :content => "General"}/
+    %meta{'name' => 'language', :content => "pt-br"}/
+    %meta{'name' => 'DC.title', :content => "RubyOnda.com - Na crista da onda, trazendo as novidades sobre Ruby, Rails e mais"}/
+    
+    
     = stylesheet_link_tag  "reset", "style", "960", "text"
     = auto_discovery_link_tag :rss, "http://feeds.feedburner.com/RubyOnda", :title => 'RubyOnda.com'
     = javascript_include_tag 'prototype'
