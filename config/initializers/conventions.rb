@@ -10,4 +10,13 @@ OpenIdAuthentication::Result::ERROR_MESSAGES.merge(
 
 OVERLOAD_TO_PARAM = "yes"
 TagList.delimiter = " "
+
+# http://blog.codahale.com/2006/04/09/rails-environments-a-plugin-for-well-rails/
+class Env
+  def self.environment;   ENV['RAILS_ENV'].to_s.downcase end
+  def self.development?;  (environment == 'development') end
+  def self.production?;   (environment == 'production') end
+  def self.test?;         (environment == 'test') end
+  def self.none?;         environment.empty? end
+end
       

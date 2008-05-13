@@ -33,10 +33,10 @@ class PostsController < ApplicationController
         if current_user.editor? || current_user.has_min_authorized_posts?
           flash[:notice] = "Artigo criado como sucesso."
         else
-          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo está em moderação por não ter pelo menos 10 artigos publicados."
+          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo será avaliado. Após 10 artigos autorizados seus artigos serão ."
         end
         begin
-          Notifier.deliver_new_post(@post) if ENV['RAILS_ENV'] == 'production'
+          Notifier.deliver_new_post(@post) if Env.production?
         rescue
           logger.warn { "could not send email" }
         ensure
