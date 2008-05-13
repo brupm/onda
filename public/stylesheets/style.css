@@ -4,7 +4,7 @@ body {
 	color:#585858;	
 }
 .top_div {
-	padding-top: 20px;
+	padding-top: 40px;
 }
 a{
 	color:#484848;
@@ -229,6 +229,10 @@ a.new{
 }
 #help {
 	display: none;
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	left: 0px;
 	text-align: center;
 	font-size: 100%;
 	font-weight: normal;
@@ -236,7 +240,6 @@ a.new{
 	padding: 3px 0 ;
 	background: #e3e3e3;
 	border-bottom: 1px solid #CCC;
-	
 	
 }
 /*************************************
