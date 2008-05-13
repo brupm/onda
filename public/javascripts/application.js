@@ -1,2 +1,9 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+window.setTimeout('showHelp()',5000);
+function showHelp() {
+  document.getElementById("help").style.display = "block";      
+}
+window.setTimeout('hideHelp()',50000);
+function hideHelp() {
+  document.getElementById("help").style.display = "none";      
+}
+window.clearTimeout()

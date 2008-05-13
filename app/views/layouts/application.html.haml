@@ -16,14 +16,21 @@
     
     = stylesheet_link_tag  "reset", "style", "960", "text"
     = auto_discovery_link_tag :rss, "http://feeds.feedburner.com/RubyOnda", :title => 'RubyOnda.com'
-    = javascript_include_tag 'prototype'
+    = javascript_include_tag 'prototype', 'application'
   %body
-    .container_12
+    #help
+      Siga o twitter do 
+      = link_to ("@rubyonda", "http://twitter.com/rubyonda", :class => 'red') + "."
+    
+    .container_12.top_div
       .grid_8.prefix_2
         .grid_5.alpha.intro
           %h2 
             Na crista da 
-            = link_to("onda", home_path) + ", trazendo as novidades sobre Ruby, Rails e mais"
+            = link_to "onda", home_path
+            %span.supersmall
+              ?
+            , trazendo as novidades sobre Ruby, Rails e mais
           = render :partial => "shared/menu"
         .grid_2.logo
           %h1 

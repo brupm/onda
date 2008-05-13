@@ -1,8 +1,10 @@
 body {
 	background:#EBEBEB;
 	border-top:3px solid #373737;
-	padding-top:30px;
 	color:#585858;	
+}
+.top_div {
+	padding-top: 20px;
 }
 a{
 	color:#484848;
@@ -36,6 +38,17 @@ h1 {
 	padding:.3em 0em;
 	font-size:1.7em;
 	letter-spacing:-1px;
+}
+.intro h2 a{
+	color: #C11727;
+	text-decoration: none;
+	margin-right: -5px;
+}
+.intro h2 .supersmall {
+	color: #C11727;
+	font-size: 50%;	
+	margin-left:0;
+	vertical-align: super;
 }
 .nav {
 	text-align: right;
@@ -174,7 +187,7 @@ a.new{
 
 }
 .red {
-	color: #720A25 !important;
+	color: #C11727 !important;
 }
 
 .css1 { font-size: .7em; }
@@ -213,6 +226,18 @@ a.new{
 	font-size: .8em;
 	text-transform: uppercase;
 	text-align: center;	
+}
+#help {
+	display: none;
+	text-align: center;
+	font-size: 100%;
+	font-weight: normal;
+	margin: 0 auto 0px auto;
+	padding: 3px 0 ;
+	background: #e3e3e3;
+	border-bottom: 1px solid #CCC;
+	
+	
 }
 /*************************************
  +Clearfix Hack

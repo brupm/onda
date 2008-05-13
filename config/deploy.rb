@@ -3,7 +3,7 @@ set :application, "rubyonda"
 set :domain,      "70.85.16.206"
 set :deploy_to,   "/var/rails/#{application}"
 set :scm,         "git"
-set :repository,  "git://github.com/brupm/onda.git"
+set :repository,  "git@github.com:brupm/onda.git"
 #set :repository,   "git@github.com:brupm/onda.git"
 
 
@@ -16,19 +16,7 @@ namespace :vlad do
 
   desc 'Symlinks your custom directories'
   remote_task :symlink, :roles => :app do
-#    run "ln -s #{shared_path}/assets #{latest_release}/public/assets" 
     run "ln -s #{shared_path}/database.yml #{current_release}/config/database.yml"
     run "ln -s #{shared_path}/private.rb #{current_release}/config/initializers/private.rb"    
   end
-
-  #desc 'Setup your custom directories in shared.'
-  #remote_task :setup_shared, :roles => :app do
-  #  dirs = %w(assets).map { |d| File.join(shared_path, d) }
-  #  run "umask 02 && mkdir -p #{dirs.join(' ')}" 
-  #end
-
-  # Run our setup_shared task during setup
-  #task :setup do
-  #  Rake::Task['vlad:setup_shared'].invoke
-  #end
 end
