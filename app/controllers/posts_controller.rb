@@ -33,7 +33,7 @@ class PostsController < ApplicationController
         if current_user.editor? || current_user.has_min_authorized_posts?
           flash[:notice] = "Artigo criado como sucesso."
         else
-          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo será avaliado. Após 10 artigos autorizados seus artigos serão ."
+          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo será avaliado. Após 10 artigos autorizados seus artigos serão automaticamente publicados."
         end
         begin
           Notifier.deliver_new_post(@post) if Env.production?
