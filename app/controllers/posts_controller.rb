@@ -17,8 +17,10 @@ class PostsController < ApplicationController
     @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
   end
   
+  #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)
   def new
-    @post = Post.new
+    params[:title] = params[:title].strip unless params[:title].blank?
+    @post = Post.new(:title => params[:title], :url => params[:url]) #params <- bookmarklet
     respond_to do |format|
       format.html 
       format.xml { render :xml => @post }
@@ -31,9 +33,9 @@ class PostsController < ApplicationController
     respond_to do |format| 
       if @post.save
         if current_user.editor? || current_user.has_min_authorized_posts?
-          flash[:notice] = "Artigo criado como sucesso."
+          flash[:notice] = "Artigo criado como sucesso. <br/> Em 10 minutos será publicado no RSS e no Twitter, aproveite para revisar o conteúdo."
         else
-          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo será avaliado. Após 10 artigos autorizados seus artigos serão automaticamente publicados."
+          flash[:notice] = "Artigo criado como sucesso. <br />Seu artigo agora será avaliado.<br/> Após 10 artigos autorizados seus artigos serão automaticamente publicados. <br/>Enquanto seu artigo não foi publicado, aproveite para revisá-lo."
         end
         begin
           Notifier.deliver_new_post(@post) if Env.production?
@@ -91,19 +93,32 @@ class PostsController < ApplicationController
   
   def edit
     unless @post.can_edit?(current_user)
-      flash[:notice] = "Este artigo não pode ser editar por você, entre em contato com algum administrador."
-      redirect_to posts_url
+      flash[:notice] = "Este artigo não pode ser editado por você, entre em contato com algum administrador."
+      redirect_to posts_path
     end
   end
   
   def update
+    unless @post.can_edit?(current_user)
+      flash[:notice] = "Este artigo não pode ser editado por você, entre em contato com algum administrador."
+      redirect_to posts_path
+      return
+    end
     respond_to do |format| 
       if @post.update_attributes(params[:post])
         flash[:notice] = "Artigo atualizado com sucesso."
-        format.html { redirect_to post_path(@post) }
+        format.html do
+          if @post.published?
+            redirect_to post_path(@post)
+          elsif !current_user.editor?
+            redirect_to my_posts_path
+          else
+            redirect_to posts_path
+          end
+        end
         format.xml  { head :ok }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
     end
