@@ -42,5 +42,5 @@
         = yield
       .grid_8.prefix_2.footer
         = render :partial => 'shared/footer'        
-      
-      = render :partial => 'shared/google'
+      - if Env.production?
+        = render :partial => 'shared/google'
