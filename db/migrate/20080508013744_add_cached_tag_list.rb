@@ -3,6 +3,6 @@ class AddCachedTagList < ActiveRecord::Migration
     add_column :posts, :cached_tag_list, :string
   end
   def self.down
-    remove_column :posts, :cached_tag_list, :string
+    remove_column :posts, :cached_tag_list
   end
 end
