@@ -31,13 +31,14 @@ class Post < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
-  
-  attr_protected :state, :authorized_by_id, :user_id, :published_at, :refused_by_id, :refused_text
+
+  attr_accessible :title, :description, :url, :cached_tag_list, :hidden, :tag_list
   attr_human_name :title => 'Título', :description => 'Texto', :url => "Link"
   
   validates_presence_of :user_id, :url, :title, :description
-  validates_length_of :description, :maximum => 290
+  validates_length_of :description, :within => 10..290
   validates_length_of :title, :within => 10..70
+  validates_uniqueness_of :title
   
   validates_presence_of :refused_text, :if => :refused?
   
@@ -97,9 +98,11 @@ class Post < ActiveRecord::Base
   end
   
   def can_edit?(user)
-    return true if user.admin?
-    return true if (user.editor? || self.user_id == user.id ) && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 10.minutes.ago))
-    false
+    can_handle?(user)
+  end
+  
+  def can_destroy?(user)
+    can_handle?(user)
   end
   
   if OVERLOAD_TO_PARAM == "yes" 
@@ -114,6 +117,18 @@ class Post < ActiveRecord::Base
   
   private
   
+  def can_handle?(user)
+    case user.role
+    when 'admin'
+      return true
+    when 'editor'
+      return self.pending? || (self.published? && published_at.to_time > 30.minutes.ago)
+    when 'writer'
+      return self.user_id == user.id && (self.pending? || (self.published? && user.has_min_authorized_posts? && published_at.to_time > 10.minutes.ago))
+    end
+    false    
+  end
+  
   def set_initial_state
     if user_id && (self.user.editor? || user.has_min_authorized_posts?)
       self.state = 'published'
@@ -124,6 +139,7 @@ class Post < ActiveRecord::Base
   def set_state
       if !refused_by_id.blank? && state != 'refused'
         self.state = 'refused'
+        self.authorized_by_id = nil
       elsif state == 'pending' && !authorized_by_id.blank?
         self.state = 'published'
         self.published_at = Time.zone.now

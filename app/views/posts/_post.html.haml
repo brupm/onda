@@ -9,7 +9,10 @@
       - if logged_in?
         - if post.can_edit?(current_user)
           %small
-            = link_to "// editar", edit_post_url(post.permalink)
+            = link_to "editar", edit_post_url(post.permalink)
+        - if post.can_destroy?(current_user)
+          %small
+            = link_to "// apagar", post_url(post), :method => :delete, :confirm => "Realmente deseja apagar '#{post.title}'?"
     %p
       = h post.description
     .owner_time
@@ -18,7 +21,7 @@
       - unless post.user.twitter_user.blank?
         \//
         = link_to "@#{post.user.twitter_user}", "http://twitter.com/#{post.user.twitter_user}"
-      - if logged_in? && current_user.admin?
+      - if logged_in? && current_user.editor?
         \//
         = link_to('Perfil', edit_user_url(post.user)) 
       \//

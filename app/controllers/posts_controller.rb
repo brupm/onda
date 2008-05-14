@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
 
-  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse, :show]
+  before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse]
   before_filter :login_required, :only => [ :new, :update, :pending, :edit, :update, :destroy, :publish, :refuse ]
-  before_filter :only_editor, :only => [ :publish, :refuse, :pending ]
-  before_filter :only_admin, :only => [ :unpublish ]
+  before_filter :only_editor, :only => [ :publish, :refuse, :pending, :all ]
   before_filter :tag_cloud, :only => [:index, :my, :search, :pending]
   
   def index    
@@ -13,11 +12,18 @@ class PostsController < ApplicationController
     end
   end
   
+  def all
+    respond_to do |format|
+      @posts = Post.paginate(:page => params[:page], :per_page => 30)
+      format.html
+    end
+  end
+  
   def my
     @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
   end
   
-  #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)
+  #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+';url='+encodeURIComponent(location.href)
   def new
     params[:title] = params[:title].strip unless params[:title].blank?
     @post = Post.new(:title => params[:title], :url => params[:url]) #params <- bookmarklet
@@ -70,10 +76,26 @@ class PostsController < ApplicationController
     end
   end
   
-  def unpublish
+  def destroy
+    unless @post.can_destroy?(current_user)
+      flash[:notice] = "Este artigo não pode ser apagado por você, entre em contato com algum administrador."
+      redirect_to posts_path
+      return
+    end
+    
     @post.authorized_by_id = nil
-    @post.refused_text = "Este artigo foi retirado por algum administrador."
-    refuse
+    @post.refused_by_id = current_user.id
+    @post.refused_text = ((current_user == @post.user) ? "Este artigo foi removido pelo próprio autor" : "Este artigo foi apagado por algum administrador.")
+    
+    respond_to do |format|
+      if @post.save
+        flash[:notice] = "Apagado com sucesso."
+        format.html { redirect_to pending_posts_path }
+      else
+        flash[:notice] = "Erro ao apagar."
+        format.html { redirect_to pending_posts_path }
+      end
+    end
   end
   
   def refuse
@@ -124,7 +146,9 @@ class PostsController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    @post = Post.find_by_permalink(params[:id], :conditions => {:state => "published"})
+  end
   
   def search
     @posts = Post.find_tagged_with(params[:id])

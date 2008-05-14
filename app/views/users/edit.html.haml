@@ -2,7 +2,7 @@
   %h2
     = (current_user.id == @user.id) ? 'Seu perfil' : "Editando Perfil"
   .errors
-    = error_messages_for :user, :message => "Dados inválidos"
+    = error_messages_for :user, :message => ""
   - form_for @user do |f|
     .field
       = f.label 'Apelido'
@@ -24,7 +24,10 @@
       %br
       @
       = f.text_field 'twitter_user', :size => 28     
-        
+    - if current_user.editor? && !@user.editor?
+      = f.label 'Status'
+      %br
+      = f.select 'active', [["Ativo",true], ["Inativo",false]]
     - if current_user.admin?
       .field
         = f.label 'Responsabilidade'

@@ -3,15 +3,14 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  def new
-  end
+  def new; end
 
   def create
-    #if using_open_id?
+    if params[:open_id_complete].nil? && params[:openid_url].blank?
+      failed_login "Entre com seu OpenID"
+    else
       open_id_authentication(params[:openid_url])
-    #else
-    #  password_authentication(params[:login], params[:password])
-    #end
+    end
   end
   
   def destroy
@@ -34,11 +33,23 @@ class SessionsController < ApplicationController
            @user.save(false)
            session[:return_to] = profile_url
          end
-         self.current_user = @user
-         successful_login
+         if @user.active?           
+           self.current_user = @user
+           successful_login
+         else
+           failed_login "Seu usuário está inativo. Entre em contato com algum administrador."
+         end
        else
          failed_login result.message
        end
+     end
+     
+   rescue
+     case $!.class.name
+     when "OpenIdAuthentication::InvalidOpenId"
+       failed_login("OpenID com formato inválido.")
+     else
+       failed_login($!.message)
      end
    end
 

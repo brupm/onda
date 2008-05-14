@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   
-  before_filter :fetch_user, :only =>   [:edit, :update]
+  before_filter :login_required
   before_filter :only_admin, :only => :index
+  before_filter :fetch_user, :only =>   [:edit, :update]
+  
 
   # def create
   #   cookies.delete :auth_token
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
     respond_to do |format| 
       @user.attributes = params[:user]
       @user.role = params[:user][:role] if current_user.admin?
+      @user.active = params[:user][:active] if current_user.editor?
       if @user.save
         flash[:notice] = "Perfil atualizado com sucesso."
         format.html { redirect_to posts_path }

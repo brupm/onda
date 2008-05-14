@@ -4,7 +4,7 @@
   .grid_8.day
     %h3 
       = posts.first.posted_at.strftime("%d de %B, %Y")
-    - @posts.each do |post|
+    - posts.each do |post|
       .post 
         .post_top
         .content
@@ -34,9 +34,7 @@
               = link_to_unless post.user.url.blank?, post.user.nick, post.user.full_url
               - if logged_in? && current_user.admin?
                 \//
-                = link_to('Perfil', edit_user_url(post.user)) 
-              \//
-            = link_to "Link Permanente", post_path(post.permalink)
+                = link_to('Perfil', edit_user_url(post.user))
 
 .bottom.clearfix
   = will_paginate @posts

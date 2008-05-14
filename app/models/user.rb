@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :role, :in => %w( admin writer editor )
   validates_presence_of :email, :nick, :identity_url
   validates_uniqueness_of :email, :nick, :identity_url
-  validates_length_of :nick, :maximum => 15
+  validates_length_of :nick, :twitter_user, :maximum => 15
   
   has_many :posts do
     def published; find(:all, :conditions => {:state => "published"}) end

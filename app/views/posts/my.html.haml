@@ -4,7 +4,7 @@
   .grid_8.day
     %h3 
       = posts.first.posted_at.strftime("%d de %B, %Y")
-    - @posts.each do |post|
+    - posts.each do |post|
       .post 
         .post_top
         .content
@@ -12,7 +12,10 @@
             = link_to post.title, post.full_url
             %small
               = " - #{post.state_pt}"
-              = link_to "// editar", edit_post_url(post.permalink)
+              - if post.can_edit?(current_user)
+                = link_to "// editar", edit_post_url(post.permalink)
+              - if post.can_destroy?(current_user)
+                = link_to "// apagar", post_url(post), :method => :delete, :confirm => "Realmente deseja apagar '#{post.title}'?"
           %p
             = h post.description
             - if post.refused?
@@ -20,8 +23,9 @@
               %strong
                 Motivo da rejeição:
               = post.refused_text
-          .owner_time
-            = link_to "Link Permanente", post_path(post.permalink)
+          - if post.published?
+            .owner_time
+              = link_to "Link Permanente", post_path(post.permalink)
 
 .bottom.clearfix
   = will_paginate @posts

@@ -6,7 +6,8 @@
     %th Nick
     %th Email
     %th URL
-    %th Admin?
+    %th Ativo
+    %th Role
     %th Posts
   - @users.each do |user|
     %tr
@@ -20,7 +21,9 @@
       %td 
         = link_to user.full_url, user.full_url unless user.full_url.nil?
       %td
-        = user.admin        
+        = user.active
+      %td
+        = user.role        
       %td
         = user.posts.count rescue 0
       
