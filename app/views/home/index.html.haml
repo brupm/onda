@@ -11,6 +11,14 @@
     Quando o artigo é publicado no site, ele é automaticamente enviado para o twitter
     = link_to ("@rubyonda", "http://twitter.com/rubyonda", :class => 'red') + "."
   %h2
+    Como Participar?
+  %p
+    Qualquer pessoa pode enviar um artigo para ser publicado, sendo que os 10 primeiros artigos serão avalidados por administradores do Ruby Onda.
+  %p
+    Você também pode utilizar o nosso bookmarklet para enviar uma página que estiver lendo. Basta arrastar o link abaixo para sua barra de favoritos e quando estiver em uma página que deseje enviar basta clicar nele.
+    %br
+    = link_to "rubyonda <<", "javascript:location.href='http://localhost:3002/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)"
+  %h2
     Quem?
   %p     
     O site foi desenvolvido em algumas horas vagas por 
