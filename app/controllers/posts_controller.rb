@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   
   def index    
     respond_to do |format|
-      format.rss  { @posts =  Post.find_latest(:limit => 50, :conditions => ["published_at < DATE_SUB(?, INTERVAL 15 MINUTE)", Time.now.utc]) } 
       format.html { @posts = Post.paginate_latest(:page => params[:page], :per_page => 30) }
+      format.rss  { @posts = Post.find_latest(:limit => 50, :conditions => ["published_at < DATE_SUB(?, INTERVAL 15 MINUTE)", Time.now.utc]) } 
     end
   end
   
