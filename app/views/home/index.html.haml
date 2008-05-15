@@ -16,8 +16,13 @@
     Qualquer pessoa pode enviar um artigo para ser publicado, sendo que os 10 primeiros artigos serão avalidados por administradores do Ruby Onda.
   %p
     Você também pode utilizar o nosso bookmarklet para enviar uma página que estiver lendo. Basta arrastar o link abaixo para sua barra de favoritos e quando estiver em uma página que deseje enviar basta clicar nele.
-    %br
-    = link_to "rubyonda <<", "javascript:location.href='http://localhost:3002/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)"
+  
+  .bookmarklet
+    = link_to image_tag('RubyOnda.png'), "javascript:location.href='http://localhost:3000/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)", :alt => " RubyOnda"
+  .bookmarklet_video
+    Instruções do Bookmarklet
+    <embed src="/images/bookmarklet.mov" height=182 width=510 type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/" autoplay="no"/>
+      
   %h2
     Quem?
   %p     
