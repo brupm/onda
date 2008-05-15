@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse]
-  before_filter :login_required, :only => [ :new, :update, :pending, :edit, :update, :destroy, :publish, :refuse ]
+  before_filter :login_required, :only => [ :new, :update, :pending, :edit, :update, :destroy, :publish, :refuse, :my, :all, :create ]
   before_filter :only_admin, :only => [ :publish, :refuse, :pending, :all ]
   before_filter :tag_cloud, :only => [:index, :my, :search, :pending]
   

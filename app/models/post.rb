@@ -46,7 +46,7 @@ class Post < ActiveRecord::Base
   before_validation_on_create :set_initial_state
   before_validation_on_update :set_state
   
-  before_save :set_permalink
+  before_create :set_permalink
   
   def validate
     if !hidden.nil?  
