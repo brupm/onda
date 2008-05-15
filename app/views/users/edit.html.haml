@@ -28,7 +28,7 @@
       = f.label 'Status'
       %br
       = f.select 'active', [["Ativo",true], ["Inativo",false]]
-    - if current_user.admin?
+    - if current_user.admin? && current_user != @user
       .field
         = f.label 'Responsabilidade'
         = f.select 'role', [["Escritor","writer"], ["Editor","editor"], ["Administrador","admin"]]

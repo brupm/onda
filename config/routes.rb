@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.aliases :resources, :posts => 'artigos', :users => 'usuarios'
-  map.aliases :actions, :new => 'novo', :edit => 'editar', :logout => 'sair', :my => 'meus', :pending => 'pendentes'
+  map.aliases :actions, :new => 'novo', :edit => 'editar', :logout => 'sair', :my => 'meus', :pending => 'pendentes', :all => 'todos'
 
 
   map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
     sessions.logout "sair", :action => "destroy", :conditions => {:method => :delete}
   end
 
-  map.resources :posts, :collection => {:pending => :get, :my => :get, :search => :get}, :member => {:publish => :post, :refuse => :post}
+  map.resources :posts, :collection => {:pending => :get, :my => :get, :search => :get, :all => :get}, :member => {:publish => :post, :refuse => :post}
   map.resources :users
   map.profile 'perfil', :controller => "users", :action => "edit"
 

@@ -5,4 +5,6 @@
     = link_to 'Meus Artigos', my_posts_url
     - if current_user.editor? && Post.pending_count > 0
       = link_to "Pendentes(#{Post.pending_count})", pending_posts_url, :class => 'red'
+    - if current_user.admin?
+      = link_to "Todos", all_posts_url
     = link_to 'Sair', logout_url, :method => :delete

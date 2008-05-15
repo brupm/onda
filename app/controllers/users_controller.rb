@@ -28,8 +28,8 @@ class UsersController < ApplicationController
     
     respond_to do |format| 
       @user.attributes = params[:user]
-      @user.role = params[:user][:role] if current_user.admin?
-      @user.active = params[:user][:active] if current_user.editor?
+      @user.role = params[:user][:role] if current_user.admin? && current_user != @user
+      @user.active = params[:user][:active] if current_user.editor? && !@user.editor?
       if @user.save
         flash[:notice] = "Perfil atualizado com sucesso."
         format.html { redirect_to posts_path }

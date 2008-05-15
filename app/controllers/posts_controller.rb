@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   before_filter :fetch_post, :only =>   [:edit, :update, :destroy, :publish, :refuse]
   before_filter :login_required, :only => [ :new, :update, :pending, :edit, :update, :destroy, :publish, :refuse ]
-  before_filter :only_editor, :only => [ :publish, :refuse, :pending, :all ]
+  before_filter :only_admin, :only => [ :publish, :refuse, :pending, :all ]
   before_filter :tag_cloud, :only => [:index, :my, :search, :pending]
   
   def index    
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   
   def all
     respond_to do |format|
-      @posts = Post.paginate(:page => params[:page], :per_page => 30)
+      @posts = Post.paginate(:page => params[:page], :per_page => 30, :order => 'created_at DESC')
       format.html
     end
   end
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
   end
   
-  #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+';url='+encodeURIComponent(location.href)
+  #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)
   def new
     params[:title] = params[:title].strip unless params[:title].blank?
     @post = Post.new(:title => params[:title], :url => params[:url]) #params <- bookmarklet

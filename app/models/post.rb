@@ -31,6 +31,7 @@ class Post < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
+  belongs_to :refused_by, :class_name => "User", :foreign_key => :refused_by_id
 
   attr_accessible :title, :description, :url, :cached_tag_list, :hidden, :tag_list
   attr_human_name :title => 'Título', :description => 'Texto', :url => "Link"

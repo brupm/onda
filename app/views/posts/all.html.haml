@@ -1,0 +1,49 @@
+%h1 Todos Artigos
+  
+- @posts.group_by {|post| post.posted_at.yday }.each do |day, posts|
+  .grid_8.day
+    %h3 
+      = posts.first.posted_at.strftime("%d de %B, %Y")
+    - posts.each do |post|
+      .post 
+        .post_top
+        .content
+          .avatar
+            = avatar_tag(post.user.email)
+          %h2 
+            = link_to post.title, post.full_url
+          %p
+            = h post.description
+            %p
+              - if post.published?
+                - if post.authorized_by.nil?
+                  publicado pelo próprio autor
+                - else
+                  publicado por
+                  = link_to "#{post.authorized_by.nick}", edit_user_url(post.authorized_by)                
+              - elsif post.refused?
+                rejeitado por 
+                = link_to "#{post.refused_by.nick}", edit_user_url(post.refused_by)
+            %p
+              - if post.pending?
+                = link_to 'Publicar', publish_post_url(post.permalink), :method => :post
+                \//
+                = link_to_function 'Rejeitar', "$('refuse_#{dom_id(post.id)}').show(); $('link_refuse_#{dom_id(post.id)}').hide()", :id => "link_refuse_#{dom_id(post.id)}"
+                \//
+              = link_to "Apagar", post_url(post), :method => :delete, :confirm => "Realmente deseja apagar '#{post.title}'?"
+              - if post.pending?              
+                - form_for post, :url => refuse_post_url(post.permalink), :html => {:style => "display: none", :id => "refuse_#{dom_id(post.id)}", :method => :post} do |f|
+                  = f.text_area :refused_text, :size => "50x10"
+                  %br
+                  = submit_tag "Rejeitar"
+                  ou
+                  = link_to_function "Cancelar", "$('refuse_#{dom_id(post.id)}').hide(); $('link_refuse_#{dom_id(post.id)}').show()"
+
+          .owner_time
+            postado por
+            = link_to_unless post.user.url.blank?, post.user.nick, post.user.full_url
+            \//
+            = link_to('Perfil', edit_user_url(post.user))
+
+.bottom.clearfix
+  = will_paginate @posts
