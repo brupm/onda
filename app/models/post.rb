@@ -113,7 +113,7 @@ class Post < ActiveRecord::Base
   end
   
   def set_permalink
-    self.permalink = self.title.downcase.gsub(" ", "-").gsub(".", "").remover_acentos
+    self.permalink = self.title.downcase.remover_acentos.gsub(/[^a-z0-9]+/i, '-')
   end
   
   private
