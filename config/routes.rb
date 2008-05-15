@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.profile 'perfil', :controller => "users", :action => "edit"
 
-  map.root :controller => "posts"
+  map.root :controller => "posts", :action => 'index', :format => 'html'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -51,5 +51,4 @@ ActionController::Routing::Routes.draw do |map|
   #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
   #     admin.resources :products
   #   end
-
 end
