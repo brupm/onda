@@ -1,7 +1,7 @@
 .form
   %h2 Novo Artigo
   .errors
-    = error_messages_for :post, :header_message => ""
+    = error_messages_for :post, :user, :header_message => ""
   - form_for @post do |f|
     = render :partial => 'form', :locals => {:f => f}
     .field.submit

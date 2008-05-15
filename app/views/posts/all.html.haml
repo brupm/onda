@@ -24,6 +24,9 @@
               - elsif post.refused?
                 rejeitado por 
                 = link_to "#{post.refused_by.nick}", edit_user_url(post.refused_by)
+                %br
+                Motivo:
+                = post.refused_text
             %p
               - if post.pending?
                 = link_to 'Publicar', publish_post_url(post.permalink), :method => :post

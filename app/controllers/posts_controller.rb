@@ -36,6 +36,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(params[:post])
     @post.user_id = current_user.id
+    @user = @post.user
     respond_to do |format| 
       if @post.save
         if current_user.editor? || current_user.has_min_authorized_posts?
