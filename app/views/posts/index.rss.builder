@@ -10,6 +10,7 @@ xml.rss :version => "2.0" do
         xml.title post.title
         xml.description post.description + "<br/>" + "Link: #{link_to post.full_url}" + "<br/><br/>" + rss_signature(post.user)
         xml.pubDate post.posted_at.to_time.rfc822
+        xml.guid post.permalink
         xml.link post.permalink
         xml.author post.user.nick
       end
