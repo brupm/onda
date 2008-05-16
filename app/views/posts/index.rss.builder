@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     for post in @posts
       xml.item do
         xml.title post.title
-        xml.description post.description
+        xml.description post.description + "<br/>" + "Link: #{link_to post.full_url}" + "<br/><br/>" + rss_signature(post.user)
         xml.pubDate post.posted_at.to_time.rfc822
         xml.link post.permalink
         xml.author post.user.nick
