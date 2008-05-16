@@ -152,7 +152,7 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = Post.find_tagged_with(params[:id])
+    @posts = Post.find_tagged_with(params[:id], :conditions => {:state => "published"})
   end
 
   def tag_cloud
