@@ -153,6 +153,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by_permalink(params[:id], :conditions => {:state => "published"})
+    @page_title = @post.title unless @post.nil?
   end
   
   def search
