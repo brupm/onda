@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :collection => {:pending => :get, :my => :get, :search => :get, :all => :get}, :member => {:publish => :post, :refuse => :post}
   map.resources :users
   map.profile 'perfil', :controller => "users", :action => "edit"
+  
+  map.connect '/meus/:id', :controller => "posts", :action => "my"
 
   map.root :controller => "posts", :action => 'index', :format => 'html'
 
