@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   
   def index    
     respond_to do |format|
-      format.html { @posts = Post.paginate_latest(:page => params[:page], :per_page => 30) }
+      format.html { @posts = Post.paginate_latest(:page => params[:page], :per_page => 30) }      
       format.rss  do
         @posts = Post.find_latest(:limit => 50, :conditions => ["published_at < DATE_SUB(?, INTERVAL 15 MINUTE)", Time.now.utc]) 
         @feed_updated = @posts.blank? ? Time.now.utc : @posts.first.created_at.utc
@@ -24,7 +24,11 @@ class PostsController < ApplicationController
   end
   
   def my
-    @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
+    if params[:id]
+      @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => params[:id]}, :order => 'created_at DESC')    
+    else 
+      @posts = Post.paginate(:page => params[:page], :conditions => {:user_id => current_user.id}, :order => 'created_at DESC')    
+    end
   end
   
   #bookmarklet: javascript:location.href='http://rubyonda.com/artigos/novo?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href)
