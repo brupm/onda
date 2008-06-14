@@ -1,8 +1,9 @@
-require 'custom_resource_name'
-
-if Rails::VERSION::MAJOR < 2
-  require 'extract_options'
-  require 'map_associations'
+require 'sitemap'
+require 'sitemap_fu'
+ActiveRecord::Base.class_eval do
+  include Queso::Acts::Sitemap
 end
-
-require 'resources' if RAILS_GEM_VERSION < '1.2.6'
+SitemapsController.view_paths = [File.join(directory, 'views')]
+SitemapSettingsController.view_paths = [File.join(directory, 'views')]
+SitemapWidgetsController.view_paths = [File.join(directory, 'views')]
+SitemapStaticLinksController.view_paths = [File.join(directory, 'views')]
