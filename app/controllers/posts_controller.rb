@@ -165,11 +165,7 @@ class PostsController < ApplicationController
   end
 
   def tag_cloud
-    if Post.tag_counts.size > 50      
-      @tags = Post.tag_counts(:order => "tags.name")
-    else 
-      @tags = Post.tag_counts
-    end
+    @tags = Post.tag_counts(:order => "tags.name", :at_least => '3')
   end
 
   protected
