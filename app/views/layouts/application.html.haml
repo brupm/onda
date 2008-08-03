@@ -37,7 +37,9 @@
       .grid_8.prefix_2
         .errors.toperrors
           = flash[:notice]
-          = flash[:error]
+          = flash[:error]          
+      .grid_8.prefix_2  
+        = render :partial => 'shared/top_banner'
         = yield
       .grid_8.prefix_2.footer
         = render :partial => 'shared/footer'        
