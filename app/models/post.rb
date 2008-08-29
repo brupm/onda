@@ -115,6 +115,10 @@ class Post < ActiveRecord::Base
   def set_permalink
     self.permalink = self.title.downcase.remover_acentos.gsub(/[^a-z0-9]+/i, '-')
   end
+
+	def short_description
+		self.description.length > 20 ? ("#{self.description[0..80]}...") : self.description
+	end
   
   private
   

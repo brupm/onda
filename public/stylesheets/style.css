@@ -301,3 +301,11 @@ a.new{
 		border-left: 1px solid #CCC;
 		text-align: center;
 		}
+		
+pre {
+	font-size: 0.82em;
+	padding: 6px;
+	background: #d4d4d4;
+	font-weight: bold;
+	text-align: center;
+}		

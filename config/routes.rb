@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
     sessions.logout "sair", :action => "destroy", :conditions => {:method => :delete}
   end
 
+	map.resources :widget, :collection => { :widget => :get, :embedded => :get }
   map.resources :posts, :collection => {:pending => :get, :my => :get, :search => :get, :all => :get}, :member => {:publish => :post, :refuse => :post}
   map.resources :users
   map.profile 'perfil', :controller => "users", :action => "edit"
