@@ -1,0 +1,85 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+#rubyonda-widget-content {
+	height: 350px;
+}
+
+.rubyonda-widget-title {
+	margin: 0px;
+	line-height: 16px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.rubyonda-widget-description {
+	margin: 0px;
+	line-height: 18px;
+	color: #585858;
+}
+
+.rubyonda-widget-tweeted-by {
+	margin: 0px;
+	line-height: 10px;
+	font-size: 10px;
+	text-align: right;
+	color: #585858;
+	padding-top: 4px;
+}
+
+#rubyonda-widget-container {
+	width: 250px;
+	height: 388px;
+	background: #ebebeb;
+	padding: 0px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 13px;
+	border: 1px solid #d4d4d4;
+}
+
+#rubyonda-widget-header {
+	height: 13px;
+	background: #d4d4d4;
+	padding: 5px;
+	font-size: 11px;
+	text-align: center;
+}
+
+#rubyonda-widget-footer {
+	height: 27px;
+	background: #d4d4d4;
+	padding: 5px;
+	font-size: 11px;
+	text-align: center;
+	line-height: 15px;
+}
+
+#rubyonda-widget-header {
+	height: 20px;
+	background: #d4d4d4;
+	padding: 5px;
+	font-size: 14px;
+	text-align: left;
+	font-weight: bold;
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: #475491;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #297299;
+}
+
+.rubyonda-widget-post {
+	padding: 4px;
+	margin: 2px;
+	border: 1px solid #d4d4d4;
+	background: #fff;
+	font-size: 12px;
+	color: blue;
+}
