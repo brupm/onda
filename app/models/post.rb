@@ -117,11 +117,11 @@ class Post < ActiveRecord::Base
   end
 
 	def short_description
-		self.description.length > 20 ? ("#{self.description[0..80]}...") : self.description
+		self.description.length > 20 ? ("#{self.description[0..60]}...") : self.description
 	end
   
   def self.last(number)
-		find :all, :limit => number, :order => 'created_at'  	
+		find :all, :limit => number, :order => 'created_at DESC'
   end
   
   private
