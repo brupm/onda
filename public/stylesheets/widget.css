@@ -4,13 +4,13 @@ body {
 }
 
 #rubyonda-widget-content {
-	height: 350px;
+	height: 275px;
 }
 
 .rubyonda-widget-title {
 	margin: 0px;
 	line-height: 16px;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -30,8 +30,8 @@ body {
 }
 
 #rubyonda-widget-container {
-	width: 250px;
-	height: 388px;
+	width: 200px;
+	height: 300px;
 	background: #ebebeb;
 	padding: 0px;
 	font-family: Arial, Verdana, sans-serif;
@@ -48,12 +48,11 @@ body {
 }
 
 #rubyonda-widget-footer {
-	height: 27px;
+	height: 13px;
 	background: #d4d4d4;
 	padding: 5px;
-	font-size: 11px;
+	font-size: 10px;
 	text-align: center;
-	line-height: 15px;
 }
 
 #rubyonda-widget-header {
