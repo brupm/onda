@@ -3,11 +3,11 @@
   <div id='rubyonda-widget-content'>
     <% @posts.each do |post| -%>
       <div class='rubyonda-widget-post'>
-      	<p class='rubyonda-widget-title'><%= link_to post.title, post.url %></p>
+      	<p class='rubyonda-widget-title'><%= link_to(post.title, post.url, { :target => 'blank'}) %></p>
       	<p class='rubyonda-widget-description'><%= post.short_description %></p>
-      	<p class='rubyonda-widget-tweeted-by'>Por <%= link_to post.user.nick, post.user.url %></p>
+      	<p class='rubyonda-widget-tweeted-by'>Por <%= link_to(post.user.nick, post.user.url, { :target => 'blank'}) %></p>
     	</div>
     <% end -%>
   </div>
-  <div id='rubyonda-widget-footer'>Copyright (c) 2008 <%= link_to 'RubyOnda', 'http://rubyonda.com' %><br/>Powered by <%= link_to 'Felipe Mesquita', 'http://felipemesquita.com' %></div>
+  <div id='rubyonda-widget-footer'>Copyright (c) 2008 <%= link_to('RubyOnda', 'http://rubyonda.com', { :target => 'blank'}) %><br/>Powered by <%= link_to('Felipe Mesquita', 'http://felipemesquita.com', { :target => 'blank'}) %></div>
 </div>
