@@ -1,0 +1,66 @@
+Custom Resource Name 1.2
+========================
+
+The Custom Resource Name Plugin lets you add aliases for your routes. This is very useful if you are developing a software to a country that does not speak English and wants all URLs in the native language.
+
+To install the plugin is very simple. The plugin is on the GitHub. If you have Git installed, take the plugin using the command:
+
+git clone git://github.com/carlosbrando/custom_resource_name.git custom_resource_name
+
+If you don’t use Git (should…) you can download the plugin and then copy the files into the folder vendor/plugins of your project.
+To download: http://github.com/carlosbrando/custom_resource_name/tarball/master
+
+To use it is simpler yet. Open the file routes.rb of your project and include the following lines BEFORE the routes that should be translated:
+
+# translate resources
+map.aliases :resources, :posts => ‘artigos‘, :comments => ‘comentarios‘
+
+# translate singleton resources
+map.aliases :resource, :comment => 'comentario'
+
+# translate actions
+map.aliases :actions, :new => ‘novo‘, :edit => ‘editar‘, :logout => ‘sair‘
+
+# translate namespaces
+map.aliases :namespaces, :admin => ‘administrativo‘
+
+If you have any english route that should stay untouched, put it before the aliases definition.
+
+Ready!
+
+You can add aliases for all its resources and actions.
+
+
+New feature
+===========
+
+Added one more feature to plugin. Imagine the following case:
+
+ActionController::Routing::Routes.draw do |map|
+  map.aliases :resources, :houses => 'casas'
+  map.aliases :actions, :new => 'novo'
+
+  map.resources :houses
+end
+
+See that all actions :new will be replaced by 'novo', but this does not fit properly in resource :casas, which would correct be 'nova' and not 'novo' (is just one example).
+
+In this case we can use the option :actions_as in the resources, like this:
+
+map.resources :houses, :actions_as => {:new => 'nova'}
+
+Problem solved. In all other cases the action :new will be called 'novo', but only in the resource :casas it will be 'nova'.
+
+In addition we also have the option :as those who do the same thing with the name of the resource.
+
+
+
+
+
+More info: http://www.nomedojogo.com/custom-resource-name-plugin/
+
+If this plugin is interesting to you, be sure to recommend me on Working with Rails.
+
+This plugin has been created by Carlos Brando, a developer of Surgeworks LLC.
+
+Copyright (c) 2008 Carlos Brando, released under the MIT license
