@@ -120,6 +120,10 @@ class Post < ActiveRecord::Base
 		self.description.length > 20 ? ("#{self.description[0..80]}...") : self.description
 	end
   
+  def self.last(number)
+		find :all, :limit => number, :order => 'created_at'  	
+  end
+  
   private
   
   def can_handle?(user)

@@ -3,7 +3,7 @@ class WidgetController < ApplicationController
   end
   
   def embedded
-		@posts = Post.find :all, :limit => 5, :order => 'created_at'
+		@posts = Post.last 5
 		render :layout => false
   end
 
