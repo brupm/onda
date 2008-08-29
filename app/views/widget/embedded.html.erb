@@ -3,7 +3,7 @@
   <div id='rubyonda-widget-content'>
     <% @posts.each do |post| -%>
       <div class='rubyonda-widget-post'>
-      	<p class='rubyonda-widget-title'><%= link_to(post.title, post.url, { :target => 'blank'}) %></p>
+      	<p class='rubyonda-widget-title'><%= link_to(post.title, post.url, { :target => 'blank'}) %></p> 
       	<p class='rubyonda-widget-tweeted-by'>Por <%= link_to(post.user.nick, post.user.url, { :target => 'blank'}) %></p>
     	</div>
     <% end -%>
