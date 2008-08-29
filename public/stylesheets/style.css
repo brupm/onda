@@ -309,3 +309,9 @@ pre {
 	font-weight: bold;
 	text-align: center;
 }		
+.widget_link {
+	width: 550px;
+	font-size: 10px;
+	overflow-x: scroll;
+	
+}
