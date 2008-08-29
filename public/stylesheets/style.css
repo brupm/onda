@@ -315,3 +315,6 @@ pre {
 	overflow-x: scroll;
 	
 }
+.center {
+	margin: 0 auto;
+}
