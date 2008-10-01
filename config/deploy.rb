@@ -8,7 +8,7 @@ set :repository,   "git://github.com/brupm/onda.git"
 
 
 set :mongrel_port, 8070
-set :mongrel_servers, 2
+set :mongrel_servers, 1
 
 namespace :vlad do
   desc 'Runs vlad:update, vlad:symlink, vlad:migrate and vlad:start'
