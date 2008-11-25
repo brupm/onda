@@ -1,5 +1,5 @@
 .grid_8.day
   %h3 
-    = @post.posted_at.strftime("%d de %B, %Y")
+    = @post.posted_at.strftime("%d de %B, %Y") rescue ""
   .post
     = render :partial =>"post", :locals => { :post => @post}
