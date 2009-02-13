@@ -165,7 +165,7 @@ class PostsController < ApplicationController
   end
 
   def tag_cloud
-    @tags = Post.tag_counts(:order => "tags.name", :at_least => '3')
+    @tags = Post.tag_counts(:order => "tags.name", :at_least => '5')
   end
 
   protected
