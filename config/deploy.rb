@@ -1,11 +1,9 @@
 
 set :application, "rubyonda"
-set :domain,      "70.85.16.206"
+set :domain,      "bopia"
 set :deploy_to,   "/var/rails/#{application}"
 set :scm,         "git"
-#set :repository,  "git@github.com:brupm/onda.git"
-set :repository,   "git://github.com/brupm/onda.git"
-
+set :repository,  "git@github.com:brupm/onda.git"
 
 set :mongrel_port, 8070
 set :mongrel_servers, 1
