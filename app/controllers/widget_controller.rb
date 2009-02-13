@@ -6,5 +6,10 @@ class WidgetController < ApplicationController
 		@posts = Post.last 5
 		render :layout => false
   end
+  
+  def ruby_inside
+    @posts = Post.last(10)
+    render :layout => false
+  end
 
 end

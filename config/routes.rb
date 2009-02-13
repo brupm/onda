@@ -20,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.profile 'perfil', :controller => "users", :action => "edit"
   
+  map.ruby_inside '/ruby_inside', :controller => 'widget', :action => 'ruby_inside'
+  
   map.connect '/meus/:id', :controller => "posts", :action => "my"
 
   map.root :controller => "posts", :action => 'index', :format => 'html'

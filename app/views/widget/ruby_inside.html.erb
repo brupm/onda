@@ -1,0 +1,6 @@
+<% for post in @posts %>
+  <div style="margin: 3px 0px;">
+    <%= link_to(post.title, post.url, { :rel => 'nofollow'}) %>
+    <span class="weak"><%= post.posted_at.strftime("%d/%m") %></span>
+  </div>
+<% end %>
