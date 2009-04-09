@@ -25,6 +25,8 @@ namespace :vlad do
     Rake::Task['vlad:start_web'].invoke
   end
 
+
+
   desc "Stop the nginx web and app servers"
 
   remote_task :stop do
