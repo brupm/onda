@@ -5,7 +5,8 @@ require 'twitter'
 class TweetPosts
 
   def self.execute
-    twit = Twitter::Base.new(ENV['TWITTER_USER'], ENV['TWITTER_PASS'])
+    httpauth = Twitter::HTTPAuth.new(ENV['TWITTER_USER'], ENV['TWITTER_PASS'])
+    twit = Twitter::Base.new(httpauth)
 
     Post.find_latest(:limit => 50, :order => "published_at", :conditions => ["published_at < DATE_SUB(?, INTERVAL 5 MINUTE) AND tweeted_at IS NULL", Time.now.utc]).each do |post|
       signature = " enviado por " + (post.user.twitter_user.blank? ? "#{post.user.nick}" : "@#{post.user.twitter_user}") 
