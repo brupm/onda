@@ -1,20 +1,31 @@
-
-set :application, "rubyonda"
+set :application, "napicit.bopia.com"
 set :domain,      "bopia"
+set :repository,  "git@github.com:brupm/napicit.git"
 set :deploy_to,   "/var/rails/#{application}"
-set :scm,         "git"
-set :repository,  "git@github.com:brupm/onda.git"
+set :scm, :git
 
-set :mongrel_port, 8070
-set :mongrel_servers, 1
+set :user, "deploy"
+set :deploy_via, :remote_cache
+set :use_sudo, false
 
-namespace :vlad do
-  desc 'Runs vlad:update, vlad:symlink, vlad:migrate and vlad:start'
-  task :deploy => ['vlad:update', 'vlad:symlink', 'vlad:migrate', 'vlad:stop_app', 'vlad:start_app']
+set :git_enable_submodules, 1
 
-  desc 'Symlinks your custom directories'
-  remote_task :symlink, :roles => :app do
-    run "ln -s #{shared_path}/database.yml #{current_release}/config/database.yml"
-    run "ln -s #{shared_path}/private.rb #{current_release}/config/initializers/private.rb"    
+role :app, domain
+role :web, domain
+role :db,  domain, :primary => true
+
+namespace :deploy do
+
+  desc "Symlink shared configs and folders on each release."
+  task :symlink_shared do
+    run "ln -nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/private.rb #{current_release}/config/initializers/private.rb"        
+  end
+
+  desc "Restarting mod_rails with restart.txt"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
   end
 end
+
+after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:restart'
