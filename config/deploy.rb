@@ -1,14 +1,12 @@
-set :application, "napicit.bopia.com"
+set :application, "rubyonda.com"
 set :domain,      "bopia"
-set :repository,  "git@github.com:brupm/napicit.git"
-set :deploy_to,   "/var/rails/#{application}"
+set :repository,  "git@github.com:brupm/onda.git"
+set :deploy_to,   "/data/rails/#{application}"
 set :scm, :git
 
 set :user, "deploy"
 set :deploy_via, :remote_cache
 set :use_sudo, false
-
-set :git_enable_submodules, 1
 
 role :app, domain
 role :web, domain
@@ -28,4 +26,4 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'deploy:restart'
+after 'deploy:update_code', 'deploy:symlink_shared'
