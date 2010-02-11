@@ -1,16 +1,6 @@
-<script type="text/javascript" charset="utf-8">
-  function showMore(){
-    document.getElementById('moreLink').style.display="none";
-    document.getElementById('detalhes').style.display="block";    
-  }
-</script>
 
 <% unless controller.controller_name == "sessions" %> 
- <div class="amazon" style="text-align: left; background: #FFF555; padding: 10px;" >
-   Estamos contratando um desenvolvedor para trabalho full-time na Hoodiny.com, uma empresa localizada em Miami, Flórida. <a href="#" onclick="javascript:showMore()" id="moreLink">Detalhes...</a>
-   <div id="detalhes" style="display:none;">
-     É necessário ter conhecimento avançado sobre <strong>JavaScript</strong> e também com <strong>Ruby</strong> e <strong>Ruby on Rails</strong>.
-     Enviem emails com links para o seu site/blog, exemplos de seu trabalho, contas no github e de repente um currículo para <%=  mail_to "bmiranda@hoodiny.com", "bmiranda@hoodiny.com", :encode => "javascript" %>    
-   </div>
- </div>
+  <div class="amazon" style="padding: 10px; text-align; right;" >
+    <a href="http://stack.bopia.com/"><img src="http://stack.bopia.com/images/rubyonda_stack.png" /></a>
+  </div>
 <% end %>
