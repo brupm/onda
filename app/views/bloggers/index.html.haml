@@ -15,11 +15,13 @@
   %h2
     Porque Participar?
   %p 
-    A intenção do RubyOnda é de auxiliar a divulgação do seu blog através da nossa rede.
+    A intenção do RubyOnda é de auxiliar a divulgação do seu blog através da nossa rede. 
+    %strong Não se esqueça de adicionar uma descrição ao seu perfil.
 
 .form.clearfix
 
   %h2 Bloggers Row
+  (por ordem de numero de artigos enviados)
   %p
   - @bloggers.each do |blogger|
     :erb 
@@ -34,6 +36,7 @@
             <% unless blogger.twitter_user.blank? %>
               (@<%= link_to blogger.twitter_user, "http://twitter.com/#{blogger.twitter_user}", :target => "_blank" %>)
             <% end %>
+            - <%= blogger.posts.count %> Artigos
             <br />
             <%= link_to "#{blogger.url} &#x2192;", blogger.url, :target => "_blank" %> <br />
             <%= blogger.blog_description %>

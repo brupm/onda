@@ -1,5 +1,5 @@
 class BloggersController < ApplicationController
   def index
-    @bloggers = User.find(:all, :conditions => ("blogger is true"), :order => "created_at ASC")
+    @bloggers = User.find(:all, :joins => :posts, :conditions => ("blogger is true"))
   end
 end

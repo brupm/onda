@@ -29,7 +29,7 @@ class Post < ActiveRecord::Base
   
   attr_accessor :hidden
   
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   belongs_to :authorized_by, :class_name => "User", :foreign_key => :authorized_by_id
   belongs_to :refused_by, :class_name => "User", :foreign_key => :refused_by_id
 
