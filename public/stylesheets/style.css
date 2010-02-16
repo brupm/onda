@@ -340,3 +340,8 @@ pre {
 	height: 51px;
 	float: right;	
 }
+.blogger_image {
+	float: left;
+	height: 100px;
+	padding: 5px 10px 0 0;
+	}

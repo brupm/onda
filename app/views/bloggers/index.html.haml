@@ -24,6 +24,10 @@
   - @bloggers.each do |blogger|
     :erb 
       <% if blogger.url && blogger.nick %>     
+        <div class="blogger_image">
+          <%= avatar_tag(blogger.email) %>
+        </div>
+
         <p>
           <%= blogger.nick %> 
           <% if blogger.twitter_user %>
