@@ -21,7 +21,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
-  attr_accessible :email, :url, :nick, :twitter_user
+  attr_accessible :email, :url, :nick, :twitter_user, :blog_description
   
   validates_inclusion_of :role, :in => %w( admin writer editor )
   validates_presence_of :email, :nick, :identity_url
