@@ -20,22 +20,22 @@
 .form.clearfix
 
   %h2 Bloggers Row
-  %p
   - @bloggers.each do |blogger|
     :erb 
-      <% if blogger.url && blogger.nick %>     
-        <div class="blogger_image">
-          <%= avatar_tag(blogger.email) %>
-        </div>
+      <div class="clearfix">
+        <% unless blogger.url.blank? || unless blogger.nick.blank? %>     
+          <div class="blogger_image">
+            <%= avatar_tag(blogger.email) %>
+          </div>
 
-        <p>
-          <%= blogger.nick %> 
-          <% if blogger.twitter_user %>
-            (@<%= link_to blogger.twitter_user, "http://twitter.com/#{blogger.twitter_user}", :target => "_blank" %>)
-          <% end %>
-          <br />
-          <%= link_to "#{blogger.url} &#x2192;", blogger.url, :target => "_blank" %> <br />
-          <%= blogger.blog_description %>
-        </p>
-      <% end %>
-    
+          <p>
+            <%= blogger.nick %> 
+            <% unless blogger.twitter_user.blank? %>
+              (@<%= link_to blogger.twitter_user, "http://twitter.com/#{blogger.twitter_user}", :target => "_blank" %>)
+            <% end %>
+            <br />
+            <%= link_to "#{blogger.url} &#x2192;", blogger.url, :target => "_blank" %> <br />
+            <%= blogger.blog_description %>
+          </p>
+        <% end %>
+      </div>
