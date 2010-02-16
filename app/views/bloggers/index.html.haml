@@ -23,7 +23,7 @@
   - @bloggers.each do |blogger|
     :erb 
       <div class="clearfix">
-        <% unless blogger.url.blank? || unless blogger.nick.blank? %>     
+        <% unless blogger.url.blank? || blogger.nick.blank? %>     
           <div class="blogger_image">
             <%= avatar_tag(blogger.email) %>
           </div>
