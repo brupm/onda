@@ -15,6 +15,18 @@
       = f.text_field 'url'
     
     .field
+      = f.label 'Deseja participar do Bloggers Row?'
+      %br
+      = f.check_box 'blogger'
+      Sim
+
+    .field
+      = f.label 'Sobre o seu blog (max. 250 letras)' 
+      %br
+      = f.text_area 'blog_description'
+
+
+    .field
       = f.label 'e-mail (não publico)' 
       %br
       = f.text_field 'email'

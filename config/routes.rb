@@ -1,8 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.aliases :resources, :posts => 'artigos', :users => 'usuarios'
+  map.aliases :resources, :posts => 'artigos', :users => 'usuarios', :bloggers => 'bloggers_row'
   map.aliases :actions, :new => 'novo', :edit => 'editar', :logout => 'sair', :my => 'meus', :pending => 'pendentes', :all => 'todos'
-
 
   map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
   
@@ -18,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.resources :widget, :collection => { :widget => :get, :embedded => :get }
   map.resources :posts, :collection => {:pending => :get, :my => :get, :search => :get, :all => :get}, :member => {:publish => :post, :refuse => :post}
   map.resources :users
+  map.resources :bloggers
   map.profile 'perfil', :controller => "users", :action => "edit"
   
   map.ruby_inside '/ruby_inside', :controller => 'widget', :action => 'ruby_inside'

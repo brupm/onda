@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :nick, :identity_url
   validates_uniqueness_of :email, :nick, :identity_url
   validates_length_of :nick, :twitter_user, :maximum => 15, :allow_blank => true
+  validates_length_of :blog_description, :within => 10..250
   
   has_many :posts do
     def published; find(:all, :conditions => {:state => "published"}) end

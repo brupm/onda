@@ -322,3 +322,21 @@ pre {
 	margin: 15px 0px 10px 20px;
 	text-align: center;
 }
+#blogger_stack {
+	padding: 10px;
+	text-align: center;
+	margin: 0 auto;
+	width: 435px;
+	height: 51px;
+	background: url(/images/blogger_stack.png) no-repeat top center;
+}
+#blogger_stack .blogger_row{
+	width: 217px;
+	height: 51px;
+	float: left;
+}
+#blogger_stack .stack{
+	width: 217px;
+	height: 51px;
+	float: right;	
+}

@@ -6,6 +6,7 @@
     %th Nick
     %th Email
     %th URL
+    %th Blogger        
     %th Ativo
     %th Role
     %th Posts
@@ -20,6 +21,8 @@
         = user.email rescue "" 
       %td 
         = link_to user.full_url, user.full_url unless user.full_url.nil?
+      %td
+        = user.blogger
       %td
         = user.active
       %td

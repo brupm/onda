@@ -1,0 +1,37 @@
+.form.clearfix
+
+  %p 
+    O Bloggers Row é um diretório de blogueiros brasileiros que trabalham com Ruby on Rails.
+
+  %h2
+    Como Participar?
+  %p
+    Quando você se inscreve no RubyOnda pode optar por participar no 
+    = link_to ("Bloggers Row", :bloggers, :class => 'red') + "."
+    Também é possível 
+    = link_to ("editar a sua conta", profile_url, :class => 'red')
+    para participar do Bloggers Row.
+
+  %h2
+    Porque Participar?
+  %p 
+    A intenção do RubyOnda é de auxiliar a divulgação do seu blog através da nossa rede.
+
+.form.clearfix
+
+  %h2 Bloggers Row
+  %p
+  - @bloggers.each do |blogger|
+    :erb 
+      <% if blogger.url && blogger.nick %>     
+        <p>
+          <%= blogger.nick %> 
+          <% if blogger.twitter_user %>
+            (@<%= link_to blogger.twitter_user, "http://twitter.com/#{blogger.twitter_user}", :target => "_blank" %>)
+          <% end %>
+          <br />
+          <%= link_to "#{blogger.url} &#x2192;", blogger.url, :target => "_blank" %> <br />
+          <%= blogger.blog_description %>
+        </p>
+      <% end %>
+    
