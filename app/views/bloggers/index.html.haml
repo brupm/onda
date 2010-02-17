@@ -23,7 +23,7 @@
   %h2 Bloggers Row
   (por ordem de numero de artigos enviados)
   %p
-  - @bloggers.each do |blogger|
+  - @bloggers.each_with_index do |blogger, index|
     :erb 
       <div class="clearfix">
         <% unless blogger.url.blank? || blogger.nick.blank? %>     
@@ -36,7 +36,16 @@
             <% unless blogger.twitter_user.blank? %>
               (@<%= link_to blogger.twitter_user, "http://twitter.com/#{blogger.twitter_user}", :target => "_blank" %>)
             <% end %>
-            - <%= blogger.posts.count %> Artigos
+            - <%= blogger.posts.count %> Artigos 
+            
+                <% if index == 0 %>
+                  <img src="/images/star.png" /><img src="/images/star.png" /><img src="/images/star.png" /> (Tsunami)
+                <% elsif index == 1 %>
+                  <img src="/images/star.png" /><img src="/images/star.png" /> (Maremoto)
+                <% elsif index == 2 %>
+                  <img src="/images/star.png" /> (Ondinha)
+                <% end %>
+
             <br />
             <%= link_to "#{blogger.url} &#x2192;", blogger.url, :target => "_blank" %> <br />
             <%= blogger.blog_description %>
