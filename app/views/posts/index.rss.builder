@@ -5,8 +5,7 @@ atom_feed(:url => @feed_url) do |feed|
   for post in @posts
     feed.entry(post) do |entry|
       entry.title(post.title)
-      entry.content((post.description + "<br/><br/>" + "Link: #{link_to post.full_url, post.full_url}" + 
-      "<br/><br/><a href='http://bit.ly/rubyonda'><img src='http://rubyonda.com/images/lojaeasy_rubyonda.jpg' /></a>"), :type => 'html')
+      entry.content((post.description + "<br/><br/>" + "Link: #{link_to post.full_url, post.full_url}"), :type => 'html')
       
       entry.author do |author|
 	      author.name(post.user.nick)
