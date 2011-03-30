@@ -7,6 +7,9 @@ atom_feed(:url => @feed_url) do |feed|
       entry.title(post.title)
       entry.content((post.description + "<br/><br/>" + "Link: #{link_to post.full_url, post.full_url}"), :type => 'html')
       
+      entry.content((post.description + "<br/><br/>" + "Link: #{link_to post.full_url, post.full_url}" + 
+      "<br/><br/><a href='http://vintenews.com/'><img src='/images/banner-620x70.png' /></a>"), :type => 'html')
+      
       entry.author do |author|
 	      author.name(post.user.nick)
 	      author.uri(post.user.url) unless post.user.url.blank?
