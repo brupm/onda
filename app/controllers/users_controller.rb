@@ -1,14 +1,18 @@
 class UsersController < ApplicationController
-  
+
   before_filter :login_required
   before_filter :only_admin, :only => :index
   before_filter :fetch_user, :only =>   [:edit, :update]
-  
-  def edit; end
-  
+
+  def edit
+    unless current_user.admin?
+      @user = current_user
+    end
+  end
+
   def update
-    
-    respond_to do |format| 
+
+    respond_to do |format|
       @user.attributes = params[:user]
       @user.role = params[:user][:role] if current_user.admin? && current_user != @user
       @user.active = params[:user][:active] if current_user.editor? && !@user.editor?
@@ -22,11 +26,11 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def index
     @users = User.find(:all, :order => "id ASC")
   end
-  
+
   protected
 
   def fetch_user
