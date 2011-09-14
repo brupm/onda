@@ -2,12 +2,9 @@ class UsersController < ApplicationController
 
   before_filter :login_required
   before_filter :only_admin, :only => :index
-  before_filter :fetch_user, :only =>   [:edit, :update]
+  before_filter :fetch_user, :only => [:edit, :update]
 
   def edit
-    unless current_user.admin?
-      @user = current_user
-    end
   end
 
   def update
@@ -34,7 +31,7 @@ class UsersController < ApplicationController
   protected
 
   def fetch_user
-    if current_user.editor? && params[:id]
+    if current_user.admin? && params[:id]
       @user = User.find(params[:id])
     else
       @user = current_user
